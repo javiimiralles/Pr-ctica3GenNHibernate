@@ -37,7 +37,7 @@ public int New_ (string p_nombre, string p_descripcion, double p_precio, int p_s
 
         productoEN.Stock = p_stock;
 
-        
+        productoEN.ValoracionMedia = 0;
 
         //Call to ProductoCAD
 

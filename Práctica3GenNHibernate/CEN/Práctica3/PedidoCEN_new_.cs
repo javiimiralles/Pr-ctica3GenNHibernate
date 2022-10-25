@@ -21,7 +21,7 @@ public partial class PedidoCEN
 {
 public int New_ (string p_direccion, string p_localidad, string p_provincia, int p_codigoPostal, string p_tipoTarjeta, string p_cliente)
 {
-        /*PROTECTED REGION ID(Práctica3GenNHibernate.CEN.Práctica3_Pedido_new__customized) START*/
+        /*PROTECTED REGION ID(Práctica3GenNHibernate.CEN.Práctica3_Pedido_new__customized) ENABLED START*/
 
         PedidoEN pedidoEN = null;
 
@@ -39,6 +39,7 @@ public int New_ (string p_direccion, string p_localidad, string p_provincia, int
 
         pedidoEN.TipoTarjeta = p_tipoTarjeta;
 
+        pedidoEN.Estado = Enumerated.Práctica3.EstadoPedidoEnum.cesta;
 
         if (p_cliente != null) {
                 pedidoEN.Cliente = new Práctica3GenNHibernate.EN.Práctica3.ClienteEN ();
