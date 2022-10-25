@@ -135,7 +135,7 @@
 			
 			
 			
-			<Compile Include="CP\Práctica3\PedidoCP_CambiarEstado.cs" />
+			<Compile Include="CEN\Práctica3\PedidoCEN_CambiarEstado.cs" />
 			
 			<Compile Include="CEN\Práctica3\PedidoCEN_RealizarPago.cs" />
 			
@@ -209,6 +209,7 @@
 	<Compile Include="CAD\Práctica3\IValoracionClienteCAD.cs" />
 	<Compile Include="CAD\Práctica3\ValoracionClienteCAD.cs" />
 	<Compile Include="CP\Práctica3\ValoracionClienteCP.cs" />
+			<Compile Include="CP\Práctica3\ValoracionClienteCP_New_.cs" />
 			
 			
 			

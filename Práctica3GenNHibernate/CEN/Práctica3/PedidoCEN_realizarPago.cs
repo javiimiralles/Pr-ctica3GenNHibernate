@@ -30,7 +30,7 @@ public void RealizarPago (int p_oid, string p_num_tarjeta, string p_tipo_tarjeta
         //Se validaría el p_num_tarjeta
         // if(p_num_tarjeta == correcto) {
         pedidoEN.FechaPedido = DateTime.Today;
-        pedidoEN.Estado = EstadoPedidoEnum.reparto;
+        pedidoEN.Estado = Enumerated.Práctica3.EstadoPedidoEnum.reparto;
         _IPedidoCAD.Modify (pedidoEN);
         // }
 

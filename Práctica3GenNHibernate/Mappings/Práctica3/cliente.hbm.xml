@@ -76,6 +76,13 @@
 					    </bag>
 					
 			
+			
+		  			
+						<many-to-one name="Genero" class="Práctica3GenNHibernate.EN.Práctica3.GeneroEN" >	
+								<column name="FK_id_idGenero"/> 
+						</many-to-one>
+											 					
+					
 					
 					
 					

@@ -26,15 +26,20 @@ public void CambiarEstado (int p_pedido_oid)
 
         PedidoEN pedidoEN = _IPedidoCAD.ReadOID (p_pedido_oid);
 
-            if (pedidoEN.Estado == EstadoPedidoEnum.cesta)
+            if (pedidoEN.Estado.Equals(EstadoPedidoEnum.cesta))
+            {
                 pedidoEN.Estado = EstadoPedidoEnum.reparto;
-            else if (pedidoEN.Estado == EstadoPedidoEnum.reparto)
+                pedidoEN.FechaEntrega = DateTime.Today;
+            }
+            else if (pedidoEN.Estado.Equals(EstadoPedidoEnum.reparto))
             {
                 pedidoEN.Estado = EstadoPedidoEnum.entregado;
                 pedidoEN.FechaEntrega = DateTime.Today;
             }
             else
                 throw new ModelException("El pedido ya ha sido entregado.");
+
+            _IPedidoCAD.Modify(pedidoEN);
 
         /*PROTECTED REGION END*/
 }

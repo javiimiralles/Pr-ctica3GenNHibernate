@@ -27,6 +27,12 @@
 					<property name="ValoracionMedia" type="double"> 
 						<column name="valoracionMedia"  not-null="true"/>
 					</property>
+					<property name="NumValoraciones" type="integer"> 
+						<column name="numValoraciones"  not-null="true"/>
+					</property>
+					<property name="ValoracionTotal" type="double"> 
+						<column name="valoracionTotal"  not-null="true"/>
+					</property>
 			
 			
 			
@@ -88,6 +94,10 @@
 					      	</key>
 							<one-to-many class="Práctica3GenNHibernate.EN.Práctica3.ValoracionClienteEN"/>
 					    </bag>
+					
+			
+			
+					
 					
 					
 					

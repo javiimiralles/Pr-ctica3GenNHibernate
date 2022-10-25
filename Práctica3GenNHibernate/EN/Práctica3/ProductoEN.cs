@@ -82,6 +82,20 @@ private System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.V
 
 
 
+/**
+ *	Atributo numValoraciones
+ */
+private int numValoraciones;
+
+
+
+/**
+ *	Atributo valoracionTotal
+ */
+private double valoracionTotal;
+
+
+
 
 
 
@@ -151,6 +165,18 @@ public virtual System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Prác
 
 
 
+public virtual int NumValoraciones {
+        get { return numValoraciones; } set { numValoraciones = value;  }
+}
+
+
+
+public virtual double ValoracionTotal {
+        get { return valoracionTotal; } set { valoracionTotal = value;  }
+}
+
+
+
 
 
 public ProductoEN()
@@ -164,20 +190,20 @@ public ProductoEN()
 
 
 
-public ProductoEN(int id, string nombre, string descripcion, double precio, int stock, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.GeneroEN> genero, double valoracionMedia, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ComentariosEN> comentarios, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ListaDeseosEN> listaDeseos, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.LineaPedidoEN> lineaPedido, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ValoracionClienteEN> valoracionCliente
+public ProductoEN(int id, string nombre, string descripcion, double precio, int stock, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.GeneroEN> genero, double valoracionMedia, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ComentariosEN> comentarios, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ListaDeseosEN> listaDeseos, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.LineaPedidoEN> lineaPedido, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ValoracionClienteEN> valoracionCliente, int numValoraciones, double valoracionTotal
                   )
 {
-        this.init (Id, nombre, descripcion, precio, stock, genero, valoracionMedia, comentarios, listaDeseos, lineaPedido, valoracionCliente);
+        this.init (Id, nombre, descripcion, precio, stock, genero, valoracionMedia, comentarios, listaDeseos, lineaPedido, valoracionCliente, numValoraciones, valoracionTotal);
 }
 
 
 public ProductoEN(ProductoEN producto)
 {
-        this.init (Id, producto.Nombre, producto.Descripcion, producto.Precio, producto.Stock, producto.Genero, producto.ValoracionMedia, producto.Comentarios, producto.ListaDeseos, producto.LineaPedido, producto.ValoracionCliente);
+        this.init (Id, producto.Nombre, producto.Descripcion, producto.Precio, producto.Stock, producto.Genero, producto.ValoracionMedia, producto.Comentarios, producto.ListaDeseos, producto.LineaPedido, producto.ValoracionCliente, producto.NumValoraciones, producto.ValoracionTotal);
 }
 
 private void init (int id
-                   , string nombre, string descripcion, double precio, int stock, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.GeneroEN> genero, double valoracionMedia, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ComentariosEN> comentarios, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ListaDeseosEN> listaDeseos, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.LineaPedidoEN> lineaPedido, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ValoracionClienteEN> valoracionCliente)
+                   , string nombre, string descripcion, double precio, int stock, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.GeneroEN> genero, double valoracionMedia, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ComentariosEN> comentarios, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ListaDeseosEN> listaDeseos, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.LineaPedidoEN> lineaPedido, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ValoracionClienteEN> valoracionCliente, int numValoraciones, double valoracionTotal)
 {
         this.Id = id;
 
@@ -201,6 +227,10 @@ private void init (int id
         this.LineaPedido = lineaPedido;
 
         this.ValoracionCliente = valoracionCliente;
+
+        this.NumValoraciones = numValoraciones;
+
+        this.ValoracionTotal = valoracionTotal;
 }
 
 public override bool Equals (object obj)

@@ -39,37 +39,6 @@ public IValoracionClienteCAD get_IValoracionClienteCAD ()
         return this._IValoracionClienteCAD;
 }
 
-public int New_ (double p_valoracion, string p_cliente, int p_producto)
-{
-        ValoracionClienteEN valoracionClienteEN = null;
-        int oid;
-
-        //Initialized ValoracionClienteEN
-        valoracionClienteEN = new ValoracionClienteEN ();
-        valoracionClienteEN.Valoracion = p_valoracion;
-
-
-        if (p_cliente != null) {
-                // El argumento p_cliente -> Property cliente es oid = false
-                // Lista de oids id
-                valoracionClienteEN.Cliente = new Práctica3GenNHibernate.EN.Práctica3.ClienteEN ();
-                valoracionClienteEN.Cliente.Email = p_cliente;
-        }
-
-
-        if (p_producto != -1) {
-                // El argumento p_producto -> Property producto es oid = false
-                // Lista de oids id
-                valoracionClienteEN.Producto = new Práctica3GenNHibernate.EN.Práctica3.ProductoEN ();
-                valoracionClienteEN.Producto.Id = p_producto;
-        }
-
-        //Call to ValoracionClienteCAD
-
-        oid = _IValoracionClienteCAD.New_ (valoracionClienteEN);
-        return oid;
-}
-
 public void Modify (int p_ValoracionCliente_OID, double p_valoracion)
 {
         ValoracionClienteEN valoracionClienteEN = null;

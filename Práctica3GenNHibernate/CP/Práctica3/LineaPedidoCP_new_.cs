@@ -63,7 +63,7 @@ public Práctica3GenNHibernate.EN.Práctica3.LineaPedidoEN New_ (int p_producto,
 
                 oid = lineaPedidoCAD.New_ (lineaPedidoEN);
 
-                PedidoEN pedidoEN = pedidoCEN.ReadOID (lineaPedidoEN.Id);
+                PedidoEN pedidoEN = pedidoCEN.ReadOID (lineaPedidoEN.Pedido.Id);
 
                 result = lineaPedidoCAD.ReadOIDDefault (oid);
                 pedidoEN.PrecioTotal += lineaPedidoEN.Cantidad * lineaPedidoEN.Producto.Precio;

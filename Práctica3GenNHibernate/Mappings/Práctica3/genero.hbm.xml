@@ -29,6 +29,18 @@
 									<column name="FK_id_idProducto"/> 
       						</many-to-many>
     					</bag>
+			
+		  			
+						<bag name="Cliente" >
+							<key>
+							
+								
+								<column name="FK_id_idGenero"/>
+					      	</key>
+							<one-to-many class="Práctica3GenNHibernate.EN.Práctica3.ClienteEN"/>
+					    </bag>
+					
+					
 					
 					
 					

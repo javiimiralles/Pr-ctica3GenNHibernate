@@ -26,6 +26,13 @@ private System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.P
 
 
 
+/**
+ *	Atributo cliente
+ */
+private System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ClienteEN> cliente;
+
+
+
 
 
 
@@ -47,29 +54,36 @@ public virtual System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Prác
 
 
 
+public virtual System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ClienteEN> Cliente {
+        get { return cliente; } set { cliente = value;  }
+}
+
+
+
 
 
 public GeneroEN()
 {
         producto = new System.Collections.Generic.List<Práctica3GenNHibernate.EN.Práctica3.ProductoEN>();
+        cliente = new System.Collections.Generic.List<Práctica3GenNHibernate.EN.Práctica3.ClienteEN>();
 }
 
 
 
-public GeneroEN(int id, string nombre, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ProductoEN> producto
+public GeneroEN(int id, string nombre, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ProductoEN> producto, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ClienteEN> cliente
                 )
 {
-        this.init (Id, nombre, producto);
+        this.init (Id, nombre, producto, cliente);
 }
 
 
 public GeneroEN(GeneroEN genero)
 {
-        this.init (Id, genero.Nombre, genero.Producto);
+        this.init (Id, genero.Nombre, genero.Producto, genero.Cliente);
 }
 
 private void init (int id
-                   , string nombre, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ProductoEN> producto)
+                   , string nombre, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ProductoEN> producto, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ClienteEN> cliente)
 {
         this.Id = id;
 
@@ -77,6 +91,8 @@ private void init (int id
         this.Nombre = nombre;
 
         this.Producto = producto;
+
+        this.Cliente = cliente;
 }
 
 public override bool Equals (object obj)

@@ -41,6 +41,12 @@ public int New_ (string p_direccion, string p_localidad, string p_provincia, int
 
         pedidoEN.Estado = Enumerated.Práctica3.EstadoPedidoEnum.cesta;
 
+        pedidoEN.FechaPedido = new DateTime (1900, 1, 1);
+
+        pedidoEN.FechaEntrega = new DateTime (1900, 1, 1);
+
+        pedidoEN.PrecioTotal = 0;
+
         if (p_cliente != null) {
                 pedidoEN.Cliente = new Práctica3GenNHibernate.EN.Práctica3.ClienteEN ();
                 pedidoEN.Cliente.Email = p_cliente;

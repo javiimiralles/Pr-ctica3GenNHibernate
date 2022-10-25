@@ -39,7 +39,7 @@ public IProductoCAD get_IProductoCAD ()
         return this._IProductoCAD;
 }
 
-public void Modify (int p_Producto_OID, string p_nombre, string p_descripcion, double p_precio, int p_stock, double p_valoracionMedia)
+public void Modify (int p_Producto_OID, string p_nombre, string p_descripcion, double p_precio, int p_stock, double p_valoracionMedia, int p_numValoraciones, double p_valoracionTotal)
 {
         ProductoEN productoEN = null;
 
@@ -51,6 +51,8 @@ public void Modify (int p_Producto_OID, string p_nombre, string p_descripcion, d
         productoEN.Precio = p_precio;
         productoEN.Stock = p_stock;
         productoEN.ValoracionMedia = p_valoracionMedia;
+        productoEN.NumValoraciones = p_numValoraciones;
+        productoEN.ValoracionTotal = p_valoracionTotal;
         //Call to ProductoCAD
 
         _IProductoCAD.Modify (productoEN);

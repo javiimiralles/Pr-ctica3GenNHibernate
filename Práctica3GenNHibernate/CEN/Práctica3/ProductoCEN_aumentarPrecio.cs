@@ -19,7 +19,7 @@ namespace Práctica3GenNHibernate.CEN.Práctica3
 {
 public partial class ProductoCEN
 {
-public void AumentarPrecio (int p_producto_oid, float p_aumento)
+public void AumentarPrecio (int p_producto_oid, double p_aumento)
 {
         /*PROTECTED REGION ID(Práctica3GenNHibernate.CEN.Práctica3_Producto_aumentarPrecio) ENABLED START*/
 

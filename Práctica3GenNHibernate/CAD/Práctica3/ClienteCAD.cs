@@ -112,6 +112,7 @@ public void ModifyDefault (ClienteEN cliente)
 
                 clienteEN.Puntos = cliente.Puntos;
 
+
                 session.Update (clienteEN);
                 SessionCommit ();
         }

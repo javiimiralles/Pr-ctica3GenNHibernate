@@ -94,6 +94,7 @@ public void ModifyDefault (GeneroEN genero)
                 generoEN.Nombre = genero.Nombre;
 
 
+
                 session.Update (generoEN);
                 SessionCommit ();
         }

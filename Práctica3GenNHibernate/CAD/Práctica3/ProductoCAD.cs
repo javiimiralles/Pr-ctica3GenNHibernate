@@ -110,6 +110,12 @@ public void ModifyDefault (ProductoEN producto)
 
 
 
+
+                productoEN.NumValoraciones = producto.NumValoraciones;
+
+
+                productoEN.ValoracionTotal = producto.ValoracionTotal;
+
                 session.Update (productoEN);
                 SessionCommit ();
         }
@@ -175,6 +181,12 @@ public void Modify (ProductoEN producto)
 
 
                 productoEN.ValoracionMedia = producto.ValoracionMedia;
+
+
+                productoEN.NumValoraciones = producto.NumValoraciones;
+
+
+                productoEN.ValoracionTotal = producto.ValoracionTotal;
 
                 session.Update (productoEN);
                 SessionCommit ();
