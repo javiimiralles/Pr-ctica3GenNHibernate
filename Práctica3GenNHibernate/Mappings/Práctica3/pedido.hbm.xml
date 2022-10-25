@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8" ?>
+		<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+		                   assembly="Práctica3GenNHibernate"
+		                   namespace="Práctica3GenNHibernate.EN.Práctica3">
+		    
+		    
+			
+				<class name="PedidoEN" table="Pedido"> 
+				  	
+						<id name="Id" column="id" type="integer"> 
+							<generator class="hilo"/>
+						</id>
+			
+					
+					<property name="FechaPedido" type="date"> 
+						<column name="fechaPedido"  not-null="true"/>
+					</property>
+					<property name="FechaEntrega" type="date"> 
+						<column name="fechaEntrega"  not-null="true"/>
+					</property>
+					<property name="Direccion" type="string"> 
+						<column name="direccion"  not-null="true"/>
+					</property>
+					<property name="Localidad" type="string"> 
+						<column name="localidad"  not-null="true"/>
+					</property>
+					<property name="Provincia" type="string"> 
+						<column name="provincia"  not-null="true"/>
+					</property>
+					<property name="CodigoPostal" type="integer"> 
+						<column name="codigoPostal"  not-null="true"/>
+					</property>
+					<property name="TipoTarjeta" type="string"> 
+						<column name="tipoTarjeta"  not-null="true"/>
+					</property>
+					<property name="Estado" > 
+						<column name="estado"  not-null="true"/>
+					</property>
+					<property name="PrecioTotal" type="double"> 
+						<column name="precioTotal"  not-null="true"/>
+					</property>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+		  			
+						<many-to-one name="Cliente" class="Práctica3GenNHibernate.EN.Práctica3.ClienteEN" >	
+								<column name="FK_email_idCliente"/> 
+						</many-to-one>
+											 					
+			
+		  			
+						<bag name="LineaPedido" cascade="delete">
+							<key>
+							
+								
+								<column name="FK_id_idPedido"/>
+					      	</key>
+							<one-to-many class="Práctica3GenNHibernate.EN.Práctica3.LineaPedidoEN"/>
+					    </bag>
+					
+			
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+		
+		 </class>	
+		  
+		  <query name="PedidoENReadAllHQL">from PedidoEN</query>
+		</hibernate-mapping>
+	

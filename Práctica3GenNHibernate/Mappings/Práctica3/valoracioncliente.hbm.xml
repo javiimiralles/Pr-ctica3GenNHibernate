@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+		<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+		                   assembly="Práctica3GenNHibernate"
+		                   namespace="Práctica3GenNHibernate.EN.Práctica3">
+		    
+		    
+			
+				<class name="ValoracionClienteEN" table="ValoracionCliente"> 
+				  	
+						<id name="Id" column="id" type="integer"> 
+							<generator class="hilo"/>
+						</id>
+			
+					
+					<property name="Valoracion" type="double"> 
+						<column name="valoracion"  not-null="true"/>
+					</property>
+			
+			
+			
+			
+		  			
+						<many-to-one name="Cliente" class="Práctica3GenNHibernate.EN.Práctica3.ClienteEN" >	
+								<column name="FK_email_idCliente"/> 
+						</many-to-one>
+											 					
+			
+		  			
+						<many-to-one name="Producto" class="Práctica3GenNHibernate.EN.Práctica3.ProductoEN" >	
+								<column name="FK_id_idProducto"/> 
+						</many-to-one>
+											 					
+					
+					
+					
+					
+		
+		 </class>	
+		  
+		  <query name="ValoracionClienteENReadAllHQL">from ValoracionClienteEN</query>
+		</hibernate-mapping>
+	
