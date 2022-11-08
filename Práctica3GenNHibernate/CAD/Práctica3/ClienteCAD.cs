@@ -283,5 +283,65 @@ public System.Collections.Generic.IList<ClienteEN> ReadAll (int first, int size)
 
         return result;
 }
+
+public System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ClienteEN> ObtenerClientesSinPuntos ()
+{
+        System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ClienteEN> result;
+        try
+        {
+                SessionInitializeTransaction ();
+                //String sql = @"FROM ClienteEN self where FROM ClienteEN as cli WHERE cli.Puntos = 0 ORDER BY cli.Nombre ASC";
+                //IQuery query = session.CreateQuery(sql);
+                IQuery query = (IQuery)session.GetNamedQuery ("ClienteENobtenerClientesSinPuntosHQL");
+
+                result = query.List<Práctica3GenNHibernate.EN.Práctica3.ClienteEN>();
+                SessionCommit ();
+        }
+
+        catch (Exception ex) {
+                SessionRollBack ();
+                if (ex is Práctica3GenNHibernate.Exceptions.ModelException)
+                        throw ex;
+                throw new Práctica3GenNHibernate.Exceptions.DataLayerException ("Error in ClienteCAD.", ex);
+        }
+
+
+        finally
+        {
+                SessionClose ();
+        }
+
+        return result;
+}
+public void AsignarGeneroFav (string p_Cliente_OID, string p_generoFavorito_OID)
+{
+        Práctica3GenNHibernate.EN.Práctica3.ClienteEN clienteEN = null;
+        try
+        {
+                SessionInitializeTransaction ();
+                clienteEN = (ClienteEN)session.Load (typeof(ClienteEN), p_Cliente_OID);
+                clienteEN.GeneroFavorito = (Práctica3GenNHibernate.EN.Práctica3.GeneroEN)session.Load (typeof(Práctica3GenNHibernate.EN.Práctica3.GeneroEN), p_generoFavorito_OID);
+
+                clienteEN.GeneroFavorito.Cliente.Add (clienteEN);
+
+
+
+                session.Update (clienteEN);
+                SessionCommit ();
+        }
+
+        catch (Exception ex) {
+                SessionRollBack ();
+                if (ex is Práctica3GenNHibernate.Exceptions.ModelException)
+                        throw ex;
+                throw new Práctica3GenNHibernate.Exceptions.DataLayerException ("Error in ClienteCAD.", ex);
+        }
+
+
+        finally
+        {
+                SessionClose ();
+        }
+}
 }
 }

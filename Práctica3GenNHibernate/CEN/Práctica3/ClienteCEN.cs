@@ -90,6 +90,16 @@ public string Login (string p_Cliente_OID, string p_pass)
         return result;
 }
 
+public System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ClienteEN> ObtenerClientesSinPuntos ()
+{
+        return _IClienteCAD.ObtenerClientesSinPuntos ();
+}
+public void AsignarGeneroFav (string p_Cliente_OID, string p_generoFavorito_OID)
+{
+        //Call to ClienteCAD
+
+        _IClienteCAD.AsignarGeneroFav (p_Cliente_OID, p_generoFavorito_OID);
+}
 
 
 

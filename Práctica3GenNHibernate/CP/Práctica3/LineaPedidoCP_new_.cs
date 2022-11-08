@@ -53,6 +53,8 @@ public Práctica3GenNHibernate.EN.Práctica3.LineaPedidoEN New_ (int p_producto,
                         lineaPedidoEN.Producto.Id = p_producto;
                 }
 
+                lineaPedidoEN.Cantidad = p_cantidad;
+
 
                 if (p_pedido != -1) {
                         lineaPedidoEN.Pedido = new Práctica3GenNHibernate.EN.Práctica3.PedidoEN ();
@@ -64,11 +66,10 @@ public Práctica3GenNHibernate.EN.Práctica3.LineaPedidoEN New_ (int p_producto,
                 oid = lineaPedidoCAD.New_ (lineaPedidoEN);
 
                 PedidoEN pedidoEN = pedidoCEN.ReadOID (lineaPedidoEN.Pedido.Id);
+                pedidoEN.PrecioTotal += lineaPedidoEN.Cantidad * lineaPedidoEN.Producto.Precio;
+                pedidoCAD.ModifyDefault (pedidoEN);
 
                 result = lineaPedidoCAD.ReadOIDDefault (oid);
-                pedidoEN.PrecioTotal += lineaPedidoEN.Cantidad * lineaPedidoEN.Producto.Precio;
-
-                pedidoCAD.ModifyDefault (pedidoEN);
 
                 SessionCommit ();
         }

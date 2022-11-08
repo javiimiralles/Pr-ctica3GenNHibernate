@@ -43,7 +43,7 @@ private int stock;
 /**
  *	Atributo genero
  */
-private System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.GeneroEN> genero;
+private Práctica3GenNHibernate.EN.Práctica3.GeneroEN genero;
 
 
 
@@ -129,7 +129,7 @@ public virtual int Stock {
 
 
 
-public virtual System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.GeneroEN> Genero {
+public virtual Práctica3GenNHibernate.EN.Práctica3.GeneroEN Genero {
         get { return genero; } set { genero = value;  }
 }
 
@@ -181,7 +181,6 @@ public virtual double ValoracionTotal {
 
 public ProductoEN()
 {
-        genero = new System.Collections.Generic.List<Práctica3GenNHibernate.EN.Práctica3.GeneroEN>();
         comentarios = new System.Collections.Generic.List<Práctica3GenNHibernate.EN.Práctica3.ComentariosEN>();
         listaDeseos = new System.Collections.Generic.List<Práctica3GenNHibernate.EN.Práctica3.ListaDeseosEN>();
         lineaPedido = new System.Collections.Generic.List<Práctica3GenNHibernate.EN.Práctica3.LineaPedidoEN>();
@@ -190,7 +189,7 @@ public ProductoEN()
 
 
 
-public ProductoEN(int id, string nombre, string descripcion, double precio, int stock, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.GeneroEN> genero, double valoracionMedia, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ComentariosEN> comentarios, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ListaDeseosEN> listaDeseos, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.LineaPedidoEN> lineaPedido, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ValoracionClienteEN> valoracionCliente, int numValoraciones, double valoracionTotal
+public ProductoEN(int id, string nombre, string descripcion, double precio, int stock, Práctica3GenNHibernate.EN.Práctica3.GeneroEN genero, double valoracionMedia, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ComentariosEN> comentarios, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ListaDeseosEN> listaDeseos, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.LineaPedidoEN> lineaPedido, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ValoracionClienteEN> valoracionCliente, int numValoraciones, double valoracionTotal
                   )
 {
         this.init (Id, nombre, descripcion, precio, stock, genero, valoracionMedia, comentarios, listaDeseos, lineaPedido, valoracionCliente, numValoraciones, valoracionTotal);
@@ -203,7 +202,7 @@ public ProductoEN(ProductoEN producto)
 }
 
 private void init (int id
-                   , string nombre, string descripcion, double precio, int stock, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.GeneroEN> genero, double valoracionMedia, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ComentariosEN> comentarios, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ListaDeseosEN> listaDeseos, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.LineaPedidoEN> lineaPedido, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ValoracionClienteEN> valoracionCliente, int numValoraciones, double valoracionTotal)
+                   , string nombre, string descripcion, double precio, int stock, Práctica3GenNHibernate.EN.Práctica3.GeneroEN genero, double valoracionMedia, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ComentariosEN> comentarios, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ListaDeseosEN> listaDeseos, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.LineaPedidoEN> lineaPedido, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ValoracionClienteEN> valoracionCliente, int numValoraciones, double valoracionTotal)
 {
         this.Id = id;
 

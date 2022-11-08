@@ -290,35 +290,6 @@ public System.Collections.Generic.IList<ProductoEN> ReadAll (int first, int size
         return result;
 }
 
-public System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ProductoEN> FiltrarPorPrecioAsc ()
-{
-        System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ProductoEN> result;
-        try
-        {
-                SessionInitializeTransaction ();
-                //String sql = @"FROM ProductoEN self where FROM ProductoEN ORDER BY precio ASC";
-                //IQuery query = session.CreateQuery(sql);
-                IQuery query = (IQuery)session.GetNamedQuery ("ProductoENfiltrarPorPrecioAscHQL");
-
-                result = query.List<Práctica3GenNHibernate.EN.Práctica3.ProductoEN>();
-                SessionCommit ();
-        }
-
-        catch (Exception ex) {
-                SessionRollBack ();
-                if (ex is Práctica3GenNHibernate.Exceptions.ModelException)
-                        throw ex;
-                throw new Práctica3GenNHibernate.Exceptions.DataLayerException ("Error in ProductoCAD.", ex);
-        }
-
-
-        finally
-        {
-                SessionClose ();
-        }
-
-        return result;
-}
 public System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ProductoEN> FiltrarPorValoracion ()
 {
         System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ProductoEN> result;
@@ -348,15 +319,16 @@ public System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.Pr
 
         return result;
 }
-public System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ProductoEN> FiltrarPorPrecioDesc ()
+public System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ProductoEN> ObtenerProductosPorGeneroFav (string p_oid_cliente)
 {
         System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ProductoEN> result;
         try
         {
                 SessionInitializeTransaction ();
-                //String sql = @"FROM ProductoEN self where FROM ProductoEN ORDER BY precio DESC";
+                //String sql = @"FROM ProductoEN self where SELECT prod FROM ClienteEN as cli, ProductoEN as prod WHERE cli.GeneroFavorito = prod.Genero AND cli.Email = :p_oid_cliente";
                 //IQuery query = session.CreateQuery(sql);
-                IQuery query = (IQuery)session.GetNamedQuery ("ProductoENfiltrarPorPrecioDescHQL");
+                IQuery query = (IQuery)session.GetNamedQuery ("ProductoENobtenerProductosPorGeneroFavHQL");
+                query.SetParameter ("p_oid_cliente", p_oid_cliente);
 
                 result = query.List<Práctica3GenNHibernate.EN.Práctica3.ProductoEN>();
                 SessionCommit ();
@@ -377,65 +349,18 @@ public System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.Pr
 
         return result;
 }
-public void AsignarGenero (int p_Producto_OID, System.Collections.Generic.IList<int> p_genero_OIDs)
+public void AsignarGenero (int p_Producto_OID, string p_genero_OID)
 {
         Práctica3GenNHibernate.EN.Práctica3.ProductoEN productoEN = null;
         try
         {
                 SessionInitializeTransaction ();
                 productoEN = (ProductoEN)session.Load (typeof(ProductoEN), p_Producto_OID);
-                Práctica3GenNHibernate.EN.Práctica3.GeneroEN generoENAux = null;
-                if (productoEN.Genero == null) {
-                        productoEN.Genero = new System.Collections.Generic.List<Práctica3GenNHibernate.EN.Práctica3.GeneroEN>();
-                }
+                productoEN.Genero = (Práctica3GenNHibernate.EN.Práctica3.GeneroEN)session.Load (typeof(Práctica3GenNHibernate.EN.Práctica3.GeneroEN), p_genero_OID);
 
-                foreach (int item in p_genero_OIDs) {
-                        generoENAux = new Práctica3GenNHibernate.EN.Práctica3.GeneroEN ();
-                        generoENAux = (Práctica3GenNHibernate.EN.Práctica3.GeneroEN)session.Load (typeof(Práctica3GenNHibernate.EN.Práctica3.GeneroEN), item);
-                        generoENAux.Producto.Add (productoEN);
-
-                        productoEN.Genero.Add (generoENAux);
-                }
+                productoEN.Genero.Producto.Add (productoEN);
 
 
-                session.Update (productoEN);
-                SessionCommit ();
-        }
-
-        catch (Exception ex) {
-                SessionRollBack ();
-                if (ex is Práctica3GenNHibernate.Exceptions.ModelException)
-                        throw ex;
-                throw new Práctica3GenNHibernate.Exceptions.DataLayerException ("Error in ProductoCAD.", ex);
-        }
-
-
-        finally
-        {
-                SessionClose ();
-        }
-}
-
-public void DesasignarGenero (int p_Producto_OID, System.Collections.Generic.IList<int> p_genero_OIDs)
-{
-        try
-        {
-                SessionInitializeTransaction ();
-                Práctica3GenNHibernate.EN.Práctica3.ProductoEN productoEN = null;
-                productoEN = (ProductoEN)session.Load (typeof(ProductoEN), p_Producto_OID);
-
-                Práctica3GenNHibernate.EN.Práctica3.GeneroEN generoENAux = null;
-                if (productoEN.Genero != null) {
-                        foreach (int item in p_genero_OIDs) {
-                                generoENAux = (Práctica3GenNHibernate.EN.Práctica3.GeneroEN)session.Load (typeof(Práctica3GenNHibernate.EN.Práctica3.GeneroEN), item);
-                                if (productoEN.Genero.Contains (generoENAux) == true) {
-                                        productoEN.Genero.Remove (generoENAux);
-                                        generoENAux.Producto.Remove (productoEN);
-                                }
-                                else
-                                        throw new ModelException ("The identifier " + item + " in p_genero_OIDs you are trying to unrelationer, doesn't exist in ProductoEN");
-                        }
-                }
 
                 session.Update (productoEN);
                 SessionCommit ();

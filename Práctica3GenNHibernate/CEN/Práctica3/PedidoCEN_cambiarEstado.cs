@@ -9,7 +9,6 @@ using NHibernate.Exceptions;
 using Práctica3GenNHibernate.Exceptions;
 using Práctica3GenNHibernate.EN.Práctica3;
 using Práctica3GenNHibernate.CAD.Práctica3;
-using Práctica3GenNHibernate.Enumerated.Práctica3;
 
 
 /*PROTECTED REGION ID(usingPráctica3GenNHibernate.CEN.Práctica3_Pedido_cambiarEstado) ENABLED START*/
@@ -26,20 +25,18 @@ public void CambiarEstado (int p_pedido_oid)
 
         PedidoEN pedidoEN = _IPedidoCAD.ReadOID (p_pedido_oid);
 
-            if (pedidoEN.Estado.Equals(EstadoPedidoEnum.cesta))
-            {
-                pedidoEN.Estado = EstadoPedidoEnum.reparto;
+        if (pedidoEN.Estado.Equals (Enumerated.Práctica3.EstadoPedidoEnum.cesta)) {
+                pedidoEN.Estado = Enumerated.Práctica3.EstadoPedidoEnum.reparto;
                 pedidoEN.FechaEntrega = DateTime.Today;
-            }
-            else if (pedidoEN.Estado.Equals(EstadoPedidoEnum.reparto))
-            {
-                pedidoEN.Estado = EstadoPedidoEnum.entregado;
+        }
+        else if (pedidoEN.Estado.Equals (Enumerated.Práctica3.EstadoPedidoEnum.reparto)) {
+                pedidoEN.Estado = Enumerated.Práctica3.EstadoPedidoEnum.entregado;
                 pedidoEN.FechaEntrega = DateTime.Today;
-            }
-            else
-                throw new ModelException("El pedido ya ha sido entregado.");
+        }
+        else
+                throw new ModelException ("El pedido ya ha sido entregado.");
 
-            _IPedidoCAD.Modify(pedidoEN);
+        _IPedidoCAD.Modify (pedidoEN);
 
         /*PROTECTED REGION END*/
 }

@@ -305,5 +305,36 @@ public System.Collections.Generic.IList<PedidoEN> ReadAll (int first, int size)
 
         return result;
 }
+
+public System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.PedidoEN> FiltrarPedidoPorProducto (int p_oid_producto)
+{
+        System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.PedidoEN> result;
+        try
+        {
+                SessionInitializeTransaction ();
+                //String sql = @"FROM PedidoEN self where SELECT ped FROM PedidoEN as ped INNER JOIN ped.LineaPedido as linped WHERE linped.Producto.Id = :p_oid_producto";
+                //IQuery query = session.CreateQuery(sql);
+                IQuery query = (IQuery)session.GetNamedQuery ("PedidoENfiltrarPedidoPorProductoHQL");
+                query.SetParameter ("p_oid_producto", p_oid_producto);
+
+                result = query.List<Práctica3GenNHibernate.EN.Práctica3.PedidoEN>();
+                SessionCommit ();
+        }
+
+        catch (Exception ex) {
+                SessionRollBack ();
+                if (ex is Práctica3GenNHibernate.Exceptions.ModelException)
+                        throw ex;
+                throw new Práctica3GenNHibernate.Exceptions.DataLayerException ("Error in PedidoCAD.", ex);
+        }
+
+
+        finally
+        {
+                SessionClose ();
+        }
+
+        return result;
+}
 }
 }

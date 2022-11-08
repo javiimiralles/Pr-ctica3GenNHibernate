@@ -80,29 +80,19 @@ public System.Collections.Generic.IList<ProductoEN> ReadAll (int first, int size
         list = _IProductoCAD.ReadAll (first, size);
         return list;
 }
-public System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ProductoEN> FiltrarPorPrecioAsc ()
-{
-        return _IProductoCAD.FiltrarPorPrecioAsc ();
-}
 public System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ProductoEN> FiltrarPorValoracion ()
 {
         return _IProductoCAD.FiltrarPorValoracion ();
 }
-public System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ProductoEN> FiltrarPorPrecioDesc ()
+public System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ProductoEN> ObtenerProductosPorGeneroFav (string p_oid_cliente)
 {
-        return _IProductoCAD.FiltrarPorPrecioDesc ();
+        return _IProductoCAD.ObtenerProductosPorGeneroFav (p_oid_cliente);
 }
-public void AsignarGenero (int p_Producto_OID, System.Collections.Generic.IList<int> p_genero_OIDs)
+public void AsignarGenero (int p_Producto_OID, string p_genero_OID)
 {
         //Call to ProductoCAD
 
-        _IProductoCAD.AsignarGenero (p_Producto_OID, p_genero_OIDs);
-}
-public void DesasignarGenero (int p_Producto_OID, System.Collections.Generic.IList<int> p_genero_OIDs)
-{
-        //Call to ProductoCAD
-
-        _IProductoCAD.DesasignarGenero (p_Producto_OID, p_genero_OIDs);
+        _IProductoCAD.AsignarGenero (p_Producto_OID, p_genero_OID);
 }
 }
 }

@@ -19,11 +19,12 @@ namespace Práctica3GenNHibernate.CEN.Práctica3
 {
 public partial class PedidoCEN
 {
-public void RealizarPago (int p_oid, string p_num_tarjeta, string p_tipo_tarjeta)
+public void RealizarPago (int p_oid_pedido, string p_num_tarjeta, string p_tipo_tarjeta, string p_oid_cliente)
 {
         /*PROTECTED REGION ID(Práctica3GenNHibernate.CEN.Práctica3_Pedido_realizarPago) ENABLED START*/
 
-        PedidoEN pedidoEN = _IPedidoCAD.ReadOID (p_oid);
+        PedidoEN pedidoEN = _IPedidoCAD.ReadOID (p_oid_pedido);
+        ClienteEN clienteEN = _IC
 
         pedidoEN.TipoTarjeta = p_tipo_tarjeta;
 

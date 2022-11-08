@@ -6,13 +6,6 @@ namespace Práctica3GenNHibernate.EN.Práctica3
 public partial class GeneroEN
 {
 /**
- *	Atributo id
- */
-private int id;
-
-
-
-/**
  *	Atributo nombre
  */
 private string nombre;
@@ -33,12 +26,6 @@ private System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.C
 
 
 
-
-
-
-public virtual int Id {
-        get { return id; } set { id = value;  }
-}
 
 
 
@@ -70,25 +57,23 @@ public GeneroEN()
 
 
 
-public GeneroEN(int id, string nombre, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ProductoEN> producto, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ClienteEN> cliente
+public GeneroEN(string nombre, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ProductoEN> producto, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ClienteEN> cliente
                 )
 {
-        this.init (Id, nombre, producto, cliente);
+        this.init (Nombre, producto, cliente);
 }
 
 
 public GeneroEN(GeneroEN genero)
 {
-        this.init (Id, genero.Nombre, genero.Producto, genero.Cliente);
+        this.init (Nombre, genero.Producto, genero.Cliente);
 }
 
-private void init (int id
-                   , string nombre, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ProductoEN> producto, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ClienteEN> cliente)
+private void init (string nombre
+                   , System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ProductoEN> producto, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ClienteEN> cliente)
 {
-        this.Id = id;
-
-
         this.Nombre = nombre;
+
 
         this.Producto = producto;
 
@@ -102,7 +87,7 @@ public override bool Equals (object obj)
         GeneroEN t = obj as GeneroEN;
         if (t == null)
                 return false;
-        if (Id.Equals (t.Id))
+        if (Nombre.Equals (t.Nombre))
                 return true;
         else
                 return false;
@@ -112,7 +97,7 @@ public override int GetHashCode ()
 {
         int hash = 13;
 
-        hash += this.Id.GetHashCode ();
+        hash += this.Nombre.GetHashCode ();
         return hash;
 }
 }

@@ -78,8 +78,8 @@
 			
 			
 		  			
-						<many-to-one name="Genero" class="Práctica3GenNHibernate.EN.Práctica3.GeneroEN" >	
-								<column name="FK_id_idGenero"/> 
+						<many-to-one name="GeneroFavorito" class="Práctica3GenNHibernate.EN.Práctica3.GeneroEN" >	
+								<column name="FK_nombre_idGenero"/> 
 						</many-to-one>
 											 					
 					
@@ -98,5 +98,6 @@
 		 </class>	
 		  
 		  <query name="ClienteENReadAllHQL">from ClienteEN</query>
+		  <query name="ClienteENobtenerClientesSinPuntosHQL"><![CDATA[FROM ClienteEN as cli WHERE cli.Puntos = 0 ORDER BY cli.Nombre ASC]]></query>
 		</hibernate-mapping>
 	

@@ -41,15 +41,10 @@
 			
 			
 		  			
-						<bag name="Genero" table="[genero_producto]" inverse="true" >
-							<key>
-								
-									<column name="FK_id_idProducto"/> 
-							</key>
-      						<many-to-many class="Práctica3GenNHibernate.EN.Práctica3.GeneroEN">
-									<column name="FK_id_idGenero"/> 
-      						</many-to-many>
-    					</bag>
+						<many-to-one name="Genero" class="Práctica3GenNHibernate.EN.Práctica3.GeneroEN" >	
+								<column name="FK_nombre_idGenero"/> 
+						</many-to-one>
+											 					
 			
 			
 		  			
@@ -114,8 +109,7 @@
 		 </class>	
 		  
 		  <query name="ProductoENReadAllHQL">from ProductoEN</query>
-		  <query name="ProductoENfiltrarPorPrecioAscHQL"><![CDATA[FROM ProductoEN ORDER BY precio ASC]]></query>
 		  <query name="ProductoENfiltrarPorValoracionHQL"><![CDATA[FROM ProductoEN ORDER BY valoracionMedia DESC]]></query>
-		  <query name="ProductoENfiltrarPorPrecioDescHQL"><![CDATA[FROM ProductoEN ORDER BY precio DESC]]></query>
+		  <query name="ProductoENobtenerProductosPorGeneroFavHQL"><![CDATA[SELECT prod FROM ClienteEN as cli, ProductoEN as prod WHERE cli.GeneroFavorito = prod.Genero AND cli.Email = :p_oid_cliente]]></query>
 		</hibernate-mapping>
 	

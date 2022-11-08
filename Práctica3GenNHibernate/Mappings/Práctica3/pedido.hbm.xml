@@ -83,5 +83,6 @@
 		 </class>	
 		  
 		  <query name="PedidoENReadAllHQL">from PedidoEN</query>
+		  <query name="PedidoENfiltrarPedidoPorProductoHQL"><![CDATA[SELECT ped FROM PedidoEN as ped INNER JOIN ped.LineaPedido as linped WHERE linped.Producto.Id = :p_oid_producto]]></query>
 		</hibernate-mapping>
 	

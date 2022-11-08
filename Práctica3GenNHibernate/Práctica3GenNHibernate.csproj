@@ -124,6 +124,8 @@
 			
 			
 			
+			
+			
 	<Compile Include="EN\Práctica3\PedidoEN.cs" />
 	<Compile Include="CEN\Práctica3\PedidoCEN.cs" />
 	<Compile Include="CAD\Práctica3\IPedidoCAD.cs" />
@@ -137,7 +139,6 @@
 			
 			<Compile Include="CEN\Práctica3\PedidoCEN_CambiarEstado.cs" />
 			
-			<Compile Include="CEN\Práctica3\PedidoCEN_RealizarPago.cs" />
 			
 	<Compile Include="EN\Práctica3\ProductoEN.cs" />
 	<Compile Include="CEN\Práctica3\ProductoCEN.cs" />
@@ -157,8 +158,6 @@
 			<Compile Include="CEN\Práctica3\ProductoCEN_AumentarStock.cs" />
 			
 			<Compile Include="CEN\Práctica3\ProductoCEN_DecrementarStock.cs" />
-			
-			
 			
 			
 			

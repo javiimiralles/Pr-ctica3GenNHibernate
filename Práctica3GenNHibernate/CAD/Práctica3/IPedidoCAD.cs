@@ -29,5 +29,9 @@ PedidoEN ReadOID (int id
 
 
 System.Collections.Generic.IList<PedidoEN> ReadAll (int first, int size);
+
+
+
+System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.PedidoEN> FiltrarPedidoPorProducto (int p_oid_producto);
 }
 }

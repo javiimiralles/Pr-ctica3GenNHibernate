@@ -29,5 +29,12 @@ ClienteEN ReadOID (string email
 
 
 System.Collections.Generic.IList<ClienteEN> ReadAll (int first, int size);
+
+
+
+System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ClienteEN> ObtenerClientesSinPuntos ();
+
+
+void AsignarGeneroFav (string p_Cliente_OID, string p_generoFavorito_OID);
 }
 }

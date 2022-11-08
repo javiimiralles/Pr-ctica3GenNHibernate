@@ -29,7 +29,7 @@ public GeneroCAD(ISession sessionAux) : base (sessionAux)
 
 
 
-public GeneroEN ReadOIDDefault (int id
+public GeneroEN ReadOIDDefault (string nombre
                                 )
 {
         GeneroEN generoEN = null;
@@ -37,7 +37,7 @@ public GeneroEN ReadOIDDefault (int id
         try
         {
                 SessionInitializeTransaction ();
-                generoEN = (GeneroEN)session.Get (typeof(GeneroEN), id);
+                generoEN = (GeneroEN)session.Get (typeof(GeneroEN), nombre);
                 SessionCommit ();
         }
 
@@ -89,10 +89,7 @@ public void ModifyDefault (GeneroEN genero)
         try
         {
                 SessionInitializeTransaction ();
-                GeneroEN generoEN = (GeneroEN)session.Load (typeof(GeneroEN), genero.Id);
-
-                generoEN.Nombre = genero.Nombre;
-
+                GeneroEN generoEN = (GeneroEN)session.Load (typeof(GeneroEN), genero.Nombre);
 
 
                 session.Update (generoEN);
@@ -114,7 +111,7 @@ public void ModifyDefault (GeneroEN genero)
 }
 
 
-public int New_ (GeneroEN genero)
+public string New_ (GeneroEN genero)
 {
         try
         {
@@ -137,7 +134,7 @@ public int New_ (GeneroEN genero)
                 SessionClose ();
         }
 
-        return genero.Id;
+        return genero.Nombre;
 }
 
 public void Modify (GeneroEN genero)
@@ -145,10 +142,7 @@ public void Modify (GeneroEN genero)
         try
         {
                 SessionInitializeTransaction ();
-                GeneroEN generoEN = (GeneroEN)session.Load (typeof(GeneroEN), genero.Id);
-
-                generoEN.Nombre = genero.Nombre;
-
+                GeneroEN generoEN = (GeneroEN)session.Load (typeof(GeneroEN), genero.Nombre);
                 session.Update (generoEN);
                 SessionCommit ();
         }
@@ -166,13 +160,13 @@ public void Modify (GeneroEN genero)
                 SessionClose ();
         }
 }
-public void Destroy (int id
+public void Destroy (string nombre
                      )
 {
         try
         {
                 SessionInitializeTransaction ();
-                GeneroEN generoEN = (GeneroEN)session.Load (typeof(GeneroEN), id);
+                GeneroEN generoEN = (GeneroEN)session.Load (typeof(GeneroEN), nombre);
                 session.Delete (generoEN);
                 SessionCommit ();
         }
@@ -193,7 +187,7 @@ public void Destroy (int id
 
 //Sin e: ReadOID
 //Con e: GeneroEN
-public GeneroEN ReadOID (int id
+public GeneroEN ReadOID (string nombre
                          )
 {
         GeneroEN generoEN = null;
@@ -201,7 +195,7 @@ public GeneroEN ReadOID (int id
         try
         {
                 SessionInitializeTransaction ();
-                generoEN = (GeneroEN)session.Get (typeof(GeneroEN), id);
+                generoEN = (GeneroEN)session.Get (typeof(GeneroEN), nombre);
                 SessionCommit ();
         }
 

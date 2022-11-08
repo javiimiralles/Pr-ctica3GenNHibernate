@@ -6,7 +6,7 @@ namespace Práctica3GenNHibernate.CAD.Práctica3
 {
 public partial interface IGeneroCAD
 {
-GeneroEN ReadOIDDefault (int id
+GeneroEN ReadOIDDefault (string nombre
                          );
 
 void ModifyDefault (GeneroEN genero);
@@ -15,16 +15,16 @@ System.Collections.Generic.IList<GeneroEN> ReadAllDefault (int first, int size);
 
 
 
-int New_ (GeneroEN genero);
+string New_ (GeneroEN genero);
 
 void Modify (GeneroEN genero);
 
 
-void Destroy (int id
+void Destroy (string nombre
               );
 
 
-GeneroEN ReadOID (int id
+GeneroEN ReadOID (string nombre
                   );
 
 

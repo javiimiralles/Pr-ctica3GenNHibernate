@@ -82,5 +82,9 @@ public System.Collections.Generic.IList<PedidoEN> ReadAll (int first, int size)
         list = _IPedidoCAD.ReadAll (first, size);
         return list;
 }
+public System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.PedidoEN> FiltrarPedidoPorProducto (int p_oid_producto)
+{
+        return _IPedidoCAD.FiltrarPedidoPorProducto (p_oid_producto);
+}
 }
 }
