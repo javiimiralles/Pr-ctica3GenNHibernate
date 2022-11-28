@@ -19,7 +19,7 @@ namespace Práctica3GenNHibernate.CEN.Práctica3
 {
 public partial class ProductoCEN
 {
-public int New_ (string p_nombre, string p_descripcion, double p_precio, int p_stock)
+public int New_ (string p_nombre, string p_descripcion, double p_precio, int p_stock, string p_imagen)
 {
         /*PROTECTED REGION ID(Práctica3GenNHibernate.CEN.Práctica3_Producto_new__customized) ENABLED START*/
 
@@ -36,6 +36,8 @@ public int New_ (string p_nombre, string p_descripcion, double p_precio, int p_s
         productoEN.Precio = p_precio;
 
         productoEN.Stock = p_stock;
+
+        productoEN.Imagen = p_imagen;
 
         productoEN.ValoracionMedia = 0;
 

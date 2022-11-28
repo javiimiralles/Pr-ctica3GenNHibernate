@@ -123,6 +123,8 @@
 			
 			
 			
+			<Compile Include="CEN\Práctica3\ClienteCEN_Login.cs" />
+			
 			
 			
 			
@@ -158,6 +160,7 @@
 			<Compile Include="CEN\Práctica3\ProductoCEN_AumentarStock.cs" />
 			
 			<Compile Include="CEN\Práctica3\ProductoCEN_DecrementarStock.cs" />
+			
 			
 			
 			

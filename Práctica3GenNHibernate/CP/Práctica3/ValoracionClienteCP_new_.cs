@@ -82,6 +82,8 @@ public Práctica3GenNHibernate.EN.Práctica3.ValoracionClienteEN New_ (double p_
                         productoEN.ValoracionMedia = productoEN.ValoracionTotal / productoEN.NumValoraciones;
                 }
 
+                productoEN.ValoracionMedia = Math.Round (productoEN.ValoracionMedia);
+
                 productoCAD.Modify (productoEN);
 
                 SessionCommit ();

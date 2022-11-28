@@ -36,5 +36,7 @@ System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ClienteEN
 
 
 void AsignarGeneroFav (string p_Cliente_OID, string p_generoFavorito_OID);
+
+System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ClienteEN> DameClientesPorEmail (string p_email);
 }
 }

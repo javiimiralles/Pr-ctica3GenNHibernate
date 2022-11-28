@@ -99,5 +99,6 @@
 		  
 		  <query name="ClienteENReadAllHQL">from ClienteEN</query>
 		  <query name="ClienteENobtenerClientesSinPuntosHQL"><![CDATA[FROM ClienteEN as cli WHERE cli.Puntos = 0 ORDER BY cli.Nombre ASC]]></query>
+		  <query name="ClienteENdameClientesPorEmailHQL"><![CDATA[FROM ClienteEN as cli WHERE cli.Email = :p_email]]></query>
 		</hibernate-mapping>
 	

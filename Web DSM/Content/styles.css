@@ -1,0 +1,72 @@
+﻿
+/*Index*/
+.dropdown > div {
+    margin-top: 1em;
+}
+
+.index-container{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    margin: 3em;
+}
+
+.index-container > div {
+    margin-bottom: 5em;
+}
+
+.index-container > div > div > p{
+    display: inline-block;
+    margin: .3em 2em .5em 0;
+    font-size: 1.2em;
+}
+
+.product-name {
+    font-weight: bold;
+    font-size: 1.5em;
+    margin-top: 0.7em 0 0 0;
+}
+
+.product-type {
+    display: inline-block;
+    padding: .5em;
+    border: 1px solid black;
+    border-radius: .5em;
+    background-color: lightgray;
+}
+
+/*Details*/
+.details-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    margin: 3em;
+}
+
+.details-container > div:last-of-type {
+    margin-left: 5em;
+}
+
+.comments-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin: 3em;
+}
+
+.comments-container > div {
+    padding: 0 1.3em;
+}
+
+.comments-container > div:nth-child(even) {
+    border-left: 1px solid lightgray;
+    border-right: 1px solid lightgray;
+}
+
+.comments-container > div > h4, .comments-container > div > p:first-of-type {
+    display: inline-block;
+}
+
+.valoracion {
+    margin-left: .5em;
+    color: gray;
+}
+
+

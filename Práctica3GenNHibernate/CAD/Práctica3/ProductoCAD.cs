@@ -116,6 +116,9 @@ public void ModifyDefault (ProductoEN producto)
 
                 productoEN.ValoracionTotal = producto.ValoracionTotal;
 
+
+                productoEN.Imagen = producto.Imagen;
+
                 session.Update (productoEN);
                 SessionCommit ();
         }
@@ -187,6 +190,9 @@ public void Modify (ProductoEN producto)
 
 
                 productoEN.ValoracionTotal = producto.ValoracionTotal;
+
+
+                productoEN.Imagen = producto.Imagen;
 
                 session.Update (productoEN);
                 SessionCommit ();
@@ -378,6 +384,37 @@ public void AsignarGenero (int p_Producto_OID, string p_genero_OID)
         {
                 SessionClose ();
         }
+}
+
+public System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ProductoEN> DameProductosPorGenero (string p_genero)
+{
+        System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ProductoEN> result;
+        try
+        {
+                SessionInitializeTransaction ();
+                //String sql = @"FROM ProductoEN self where SELECT prod FROM ProductoEN as prod WHERE prod.Genero.Nombre = :p_genero";
+                //IQuery query = session.CreateQuery(sql);
+                IQuery query = (IQuery)session.GetNamedQuery ("ProductoENdameProductosPorGeneroHQL");
+                query.SetParameter ("p_genero", p_genero);
+
+                result = query.List<Práctica3GenNHibernate.EN.Práctica3.ProductoEN>();
+                SessionCommit ();
+        }
+
+        catch (Exception ex) {
+                SessionRollBack ();
+                if (ex is Práctica3GenNHibernate.Exceptions.ModelException)
+                        throw ex;
+                throw new Práctica3GenNHibernate.Exceptions.DataLayerException ("Error in ProductoCAD.", ex);
+        }
+
+
+        finally
+        {
+                SessionClose ();
+        }
+
+        return result;
 }
 }
 }

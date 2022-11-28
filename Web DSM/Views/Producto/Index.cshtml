@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Web_DSM.Models.ProductoViewModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="jumbotron">
+    <h1>MELODY RECORDS</h1>
+    <p class="lead">Encuentra tus discos, vinilos y demás artículos de tus artistas favoritos</p>
+</div>
+
+<div class="container-fluid">
+
+    <div class="dropdown">
+        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            Filtrar por Género
+            <span class="caret"></span>
+        </button>
+        <div class="row" style="background-color:gray">
+            <div class="col-sm-12" style="background-color: gray"></div>
+        </div>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+            @{ List<string> generos = new List<string>(); }
+            @foreach (var item in Model)
+            {
+                if (!generos.Contains(item.Genero))
+                {
+                    <li>@Html.ActionLink(item.Genero, "PorGenero", "Producto", routeValues: new { genero = item.Genero }, htmlAttributes: null)</li>
+                }
+                generos.Add(item.Genero);
+            }
+        </ul>
+    </div>
+</div>
+
+<div class="index-container">
+    @foreach (var item in Model)
+    {
+    <div>
+        <img src="@Html.DisplayFor(modelItem => item.Imagen)" height="450" width="450" />
+        <p class="product-name">@Html.DisplayFor(modelItem => item.Nombre)</p>
+        <div>
+            <p>Valoración media: @Html.DisplayFor(modelItem => item.ValoracionMedia)/5 &#9733;</p>
+            <p>@Html.DisplayFor(modelItem => item.Precio)</p>
+            <p class="product-type">@Html.DisplayFor(modelItem => item.Genero)</p>
+        </div>
+        @if (item.Stock == 0)
+        {
+            <p>Sin stock</p>
+        }
+        @Html.ActionLink("Detalles", "Details", new { id = item.Id })
+    </div>
+    }
+</div>
+
+

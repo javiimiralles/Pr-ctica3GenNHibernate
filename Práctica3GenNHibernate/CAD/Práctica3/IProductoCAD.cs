@@ -42,5 +42,7 @@ System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ProductoE
 
 
 void AsignarGenero (int p_Producto_OID, string p_genero_OID);
+
+System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ProductoEN> DameProductosPorGenero (string p_genero);
 }
 }

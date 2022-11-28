@@ -79,17 +79,6 @@ public System.Collections.Generic.IList<ClienteEN> ReadAll (int first, int size)
         list = _IClienteCAD.ReadAll (first, size);
         return list;
 }
-public string Login (string p_Cliente_OID, string p_pass)
-{
-        string result = null;
-        ClienteEN en = _IClienteCAD.ReadOIDDefault (p_Cliente_OID);
-
-        if (en != null && en.Pass.Equals (Utils.Util.GetEncondeMD5 (p_pass)))
-                result = this.GetToken (en.Email);
-
-        return result;
-}
-
 public System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ClienteEN> ObtenerClientesSinPuntos ()
 {
         return _IClienteCAD.ObtenerClientesSinPuntos ();
@@ -99,6 +88,10 @@ public void AsignarGeneroFav (string p_Cliente_OID, string p_generoFavorito_OID)
         //Call to ClienteCAD
 
         _IClienteCAD.AsignarGeneroFav (p_Cliente_OID, p_generoFavorito_OID);
+}
+public System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ClienteEN> DameClientesPorEmail (string p_email)
+{
+        return _IClienteCAD.DameClientesPorEmail (p_email);
 }
 
 

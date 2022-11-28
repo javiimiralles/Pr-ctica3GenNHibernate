@@ -343,5 +343,36 @@ public void AsignarGeneroFav (string p_Cliente_OID, string p_generoFavorito_OID)
                 SessionClose ();
         }
 }
+
+public System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ClienteEN> DameClientesPorEmail (string p_email)
+{
+        System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ClienteEN> result;
+        try
+        {
+                SessionInitializeTransaction ();
+                //String sql = @"FROM ClienteEN self where FROM ClienteEN as cli WHERE cli.Email = :p_email";
+                //IQuery query = session.CreateQuery(sql);
+                IQuery query = (IQuery)session.GetNamedQuery ("ClienteENdameClientesPorEmailHQL");
+                query.SetParameter ("p_email", p_email);
+
+                result = query.List<Práctica3GenNHibernate.EN.Práctica3.ClienteEN>();
+                SessionCommit ();
+        }
+
+        catch (Exception ex) {
+                SessionRollBack ();
+                if (ex is Práctica3GenNHibernate.Exceptions.ModelException)
+                        throw ex;
+                throw new Práctica3GenNHibernate.Exceptions.DataLayerException ("Error in ClienteCAD.", ex);
+        }
+
+
+        finally
+        {
+                SessionClose ();
+        }
+
+        return result;
+}
 }
 }

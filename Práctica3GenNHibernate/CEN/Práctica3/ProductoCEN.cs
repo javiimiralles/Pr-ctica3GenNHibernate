@@ -39,7 +39,7 @@ public IProductoCAD get_IProductoCAD ()
         return this._IProductoCAD;
 }
 
-public void Modify (int p_Producto_OID, string p_nombre, string p_descripcion, double p_precio, int p_stock, double p_valoracionMedia, int p_numValoraciones, double p_valoracionTotal)
+public void Modify (int p_Producto_OID, string p_nombre, string p_descripcion, double p_precio, int p_stock, double p_valoracionMedia, int p_numValoraciones, double p_valoracionTotal, string p_imagen)
 {
         ProductoEN productoEN = null;
 
@@ -53,6 +53,7 @@ public void Modify (int p_Producto_OID, string p_nombre, string p_descripcion, d
         productoEN.ValoracionMedia = p_valoracionMedia;
         productoEN.NumValoraciones = p_numValoraciones;
         productoEN.ValoracionTotal = p_valoracionTotal;
+        productoEN.Imagen = p_imagen;
         //Call to ProductoCAD
 
         _IProductoCAD.Modify (productoEN);
@@ -93,6 +94,10 @@ public void AsignarGenero (int p_Producto_OID, string p_genero_OID)
         //Call to ProductoCAD
 
         _IProductoCAD.AsignarGenero (p_Producto_OID, p_genero_OID);
+}
+public System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ProductoEN> DameProductosPorGenero (string p_genero)
+{
+        return _IProductoCAD.DameProductosPorGenero (p_genero);
 }
 }
 }

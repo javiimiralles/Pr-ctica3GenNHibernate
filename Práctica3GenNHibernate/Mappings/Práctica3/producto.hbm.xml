@@ -33,6 +33,9 @@
 					<property name="ValoracionTotal" type="double"> 
 						<column name="valoracionTotal"  not-null="true"/>
 					</property>
+					<property name="Imagen" type="string"> 
+						<column name="imagen"  not-null="true"/>
+					</property>
 			
 			
 			
@@ -92,6 +95,8 @@
 					
 			
 			
+			
+					
 					
 					
 					
@@ -111,5 +116,6 @@
 		  <query name="ProductoENReadAllHQL">from ProductoEN</query>
 		  <query name="ProductoENfiltrarPorValoracionHQL"><![CDATA[FROM ProductoEN ORDER BY valoracionMedia DESC]]></query>
 		  <query name="ProductoENobtenerProductosPorGeneroFavHQL"><![CDATA[SELECT prod FROM ClienteEN as cli, ProductoEN as prod WHERE cli.GeneroFavorito = prod.Genero AND cli.Email = :p_oid_cliente]]></query>
+		  <query name="ProductoENdameProductosPorGeneroHQL"><![CDATA[SELECT prod FROM ProductoEN as prod WHERE prod.Genero.Nombre = :p_genero]]></query>
 		</hibernate-mapping>
 	

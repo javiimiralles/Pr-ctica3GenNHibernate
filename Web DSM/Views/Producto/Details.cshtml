@@ -1,0 +1,77 @@
+﻿
+
+@model Web_DSM.Models.ProductoViewModel
+
+@{
+    ViewBag.Title = "Detalles";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<hr />
+<p>
+    @Html.ActionLink("Volver atrás", "Index")
+</p>
+<div class="details-container">
+    <div>
+        <img src="@Html.DisplayFor(model => model.Imagen)" width="600" height="600" />
+    </div>
+    <div>
+        <h3>@Html.DisplayFor(model => model.Nombre)</h3>
+        <p><strong>@Html.DisplayNameFor(model => model.Descripcion):</strong> @Html.DisplayFor(model => model.Descripcion)</p>
+        <p class="product-type">@Html.DisplayFor(model => model.Genero)</p>
+        <p>@Html.DisplayFor(model => model.Precio)</p>
+        <p>
+            <strong>Valoración: </strong>
+            @if (Model.ValoracionMedia != 0)
+            {
+                for (var i = 0; i < Model.ValoracionMedia; i++)
+                {
+                    <span>&#9733;</span>
+                }
+            }
+            else
+            {
+                <span>&#9733;</span>
+            }
+        </p>
+        @if (Model.Stock != 0)
+        {
+            <button>&#128722; Añadir a la cesta</button>
+        }
+        else
+        {
+            <p>Sin Stock</p>
+        }
+    </div>
+</div>
+<h3><stong>Comentarios</stong></h3>
+<div class="row" style="background-color:gray">
+    <div class="col-sm-12" style="background-color: gray"></div>
+</div>
+<div class="comments-container">
+    @{ int cont = 0; }
+    @foreach(var item in Model.Comentarios)
+    {
+        <div>
+            <h4><strong>@Html.DisplayFor(model => model.NombreUsuario[cont])</strong></h4>
+            <p class="valoracion">
+                @if (Model.ValoracionCliente[cont] > 0)
+                {
+                    for (var i = 0; i < Model.ValoracionCliente[cont]; i++)
+                    {
+                        <span>&#9733;</span>
+                    }
+                }
+                else
+                {
+                    <span>&#9733;</span>
+                }
+            </p>
+            <p>@Html.DisplayFor(model => model.Comentarios[cont])</p>
+        </div>
+        cont++;
+    }
+</div>
+
+
+

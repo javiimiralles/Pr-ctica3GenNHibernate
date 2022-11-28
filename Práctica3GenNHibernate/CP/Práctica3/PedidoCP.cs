@@ -16,14 +16,6 @@ namespace Práctica3GenNHibernate.CP.Práctica3
 {
 public partial class PedidoCP : BasicCP
 {
-public PedidoCP() : base ()
-{
-}
-
-public PedidoCP(ISession sessionAux)
-        : base (sessionAux)
-{
-}
         public void RealizarPago(int p_oid_pedido, string p_oid_cliente, string p_num_tarjeta, string p_tipo_tarjeta)
         {
             PedidoCAD pedidoCAD = null;
@@ -67,5 +59,13 @@ public PedidoCP(ISession sessionAux)
                 SessionClose();
             }
         }
-    }
+        public PedidoCP() : base ()
+{
+}
+
+public PedidoCP(ISession sessionAux)
+        : base (sessionAux)
+{
+}
+}
 }

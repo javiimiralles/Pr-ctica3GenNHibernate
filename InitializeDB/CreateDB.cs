@@ -85,8 +85,8 @@ public static void InitializeData ()
                 //Creacion de generos
                 GeneroCEN generoCEN = new GeneroCEN ();
                 generoCEN.New_ ("Rock");
-                generoCEN.New_("Pop");
-                generoCEN.New_("Rap");
+                generoCEN.New_ ("Pop");
+                generoCEN.New_ ("Rap");
 
                 //Creacion de clientes
                 ClienteCEN clienteCEN = new ClienteCEN ();
@@ -94,7 +94,7 @@ public static void InitializeData ()
                 clienteCEN.New_ ("pere@gmail.com", "Pere", "Milla", "pere", 777777777, "1234");
                 clienteCEN.New_ ("lucas@gmail.com", "Lucas", "Boye", "lucasbo", 777777777, "1234");
 
-                clienteCEN.AsignarGeneroFav("paco@gmail.com", "Rock");
+                clienteCEN.AsignarGeneroFav ("paco@gmail.com", "Rock");
 
                 //Creacion de pedidos
                 PedidoCEN pedidoCEN = new PedidoCEN ();
@@ -105,11 +105,19 @@ public static void InitializeData ()
 
                 //Creacion de productos
                 ProductoCEN prodCEN = new ProductoCEN ();
-                int idProd1 = prodCEN.New_ ("Disco1", "AAAAAA", 9.90, 7);
-                int idProd2 = prodCEN.New_ ("Disco2", "BBBBB", 9.90, 5);
-                int idProd3 = prodCEN.New_ ("Disco3", "CCCCC", 9.90, 6);
+                int idProd1 = prodCEN.New_ ("ACDC", "Disco de ACDC", 14.95, 7, "../../Images/acdc.jpg");
+                int idProd2 = prodCEN.New_ ("Guns N Roses", "Disco de Guns N Roses", 19.95, 5, "../../Images/guns_n_roses.jpg");
+                int idProd3 = prodCEN.New_ ("Harry Styles", "Disco de Harry Styles", 9.95, 6, "../../Images/harry_styles.jpg");
+                int idProd4 = prodCEN.New_ ("David Bowie", "Disco de David Bowie", 29.95, 0, "../../Images/david_bowie.jpg");
+                int idProd5 = prodCEN.New_ ("Imagine Dragons", "Disco de Imagine Dragons", 14.95, 6, "../../Images/imagine_dragons.jpg");
+                int idProd6 = prodCEN.New_ ("Eminem", "Disco de Eminem", 9.95, 6, "../../Images/eminem.jpg");
 
-                prodCEN.AsignarGenero(idProd1, "Rock");
+                prodCEN.AsignarGenero (idProd1, "Rock");
+                prodCEN.AsignarGenero (idProd2, "Rock");
+                prodCEN.AsignarGenero (idProd3, "Pop");
+                prodCEN.AsignarGenero (idProd4, "Pop");
+                prodCEN.AsignarGenero (idProd5, "Rock");
+                prodCEN.AsignarGenero (idProd6, "Rap");
 
 
                 //Creacion de lineas de pedido
@@ -125,6 +133,28 @@ public static void InitializeData ()
                 //Creacion de comentarios
                 ComentariosCEN comentCEN = new ComentariosCEN ();
                 comentCEN.New_ ("Muy buen producto", "paco@gmail.com", idProd1);
+                comentCEN.New_("No está mal", "lucas@gmail.com", idProd1);
+                comentCEN.New_("No me ha gustado mucho", "pere@gmail.com", idProd1);
+
+                comentCEN.New_("Muy buen producto", "paco@gmail.com", idProd2);
+                comentCEN.New_("No está mal", "lucas@gmail.com", idProd2);
+                comentCEN.New_("Me ha gustado mucho", "pere@gmail.com", idProd2);
+
+                comentCEN.New_("Horrible", "paco@gmail.com", idProd3);
+                comentCEN.New_("No lo recomiendo", "lucas@gmail.com", idProd3);
+                comentCEN.New_("No me ha gustado nada", "pere@gmail.com", idProd3);
+
+                comentCEN.New_("Muy ha encantado, lo recomiendo", "paco@gmail.com", idProd4);
+                comentCEN.New_("Me gusta", "lucas@gmail.com", idProd4);
+                comentCEN.New_("Está genial", "pere@gmail.com", idProd4);
+
+                comentCEN.New_("No lo compren", "paco@gmail.com", idProd5);
+                comentCEN.New_("No me ha gustado nada", "lucas@gmail.com", idProd5);
+                comentCEN.New_("Decepcionante", "pere@gmail.com", idProd5);
+
+                comentCEN.New_("Me ha gustado", "paco@gmail.com", idProd6);
+                comentCEN.New_("No está nada mal", "lucas@gmail.com", idProd6);
+                comentCEN.New_("Aceptable", "pere@gmail.com", idProd6);
 
                 //Creacion de valoraciones de usuarios
                 ValoracionClienteCP valCP = new ValoracionClienteCP ();
@@ -139,6 +169,18 @@ public static void InitializeData ()
                 valCP.New_ (1, "paco@gmail.com", idProd3);
                 valCP.New_ (2, "lucas@gmail.com", idProd3);
                 valCP.New_ (1, "pere@gmail.com", idProd3);
+
+                valCP.New_(5, "paco@gmail.com", idProd4);
+                valCP.New_(3, "lucas@gmail.com", idProd4);
+                valCP.New_(4, "pere@gmail.com", idProd4);
+
+                valCP.New_(1, "paco@gmail.com", idProd5);
+                valCP.New_(1, "lucas@gmail.com", idProd5);
+                valCP.New_(2, "pere@gmail.com", idProd5);
+
+                valCP.New_(3, "paco@gmail.com", idProd6);
+                valCP.New_(3, "lucas@gmail.com", idProd6);
+                valCP.New_(3, "pere@gmail.com", idProd6);
 
                 //-----------------Probamos los metodos creados-----------------------------
                 //Incrementar y decrementar stock
@@ -211,13 +253,20 @@ public static void InitializeData ()
                 }
                 Console.WriteLine ("\n");
 
+                //DameProductosPorGenero
+                Console.WriteLine ("-------------------Obtener productos por genero------------------------");
+                IList<ProductoEN> listaProdsPorGenero = prodCEN.DameProductosPorGenero ("Rock");
+                Console.WriteLine ("Productos por género Rock");
+                foreach (ProductoEN prod in listaProdsPorGenero) {
+                        Console.WriteLine (prod.Nombre);
+                }
+
                 //ObtenerProductosPorGeneroFav
                 Console.WriteLine ("-------------------Obtener productos por genero favorito------------------------");
-                IList<ProductoEN> listaFavs = prodCEN.ObtenerProductosPorGeneroFav("paco@gmail.com");
-                Console.WriteLine("Productos recomendados para paco@gmail.com");
-                foreach(ProductoEN prod in listaFavs)
-                {
-                    Console.WriteLine(prod.Nombre);
+                IList<ProductoEN> listaFavs = prodCEN.ObtenerProductosPorGeneroFav ("paco@gmail.com");
+                Console.WriteLine ("Productos recomendados para paco@gmail.com");
+                foreach (ProductoEN prod in listaFavs) {
+                        Console.WriteLine (prod.Nombre);
                 }
 
 

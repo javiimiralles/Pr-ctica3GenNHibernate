@@ -96,6 +96,13 @@ private double valoracionTotal;
 
 
 
+/**
+ *	Atributo imagen
+ */
+private string imagen;
+
+
+
 
 
 
@@ -177,6 +184,12 @@ public virtual double ValoracionTotal {
 
 
 
+public virtual string Imagen {
+        get { return imagen; } set { imagen = value;  }
+}
+
+
+
 
 
 public ProductoEN()
@@ -189,20 +202,20 @@ public ProductoEN()
 
 
 
-public ProductoEN(int id, string nombre, string descripcion, double precio, int stock, Práctica3GenNHibernate.EN.Práctica3.GeneroEN genero, double valoracionMedia, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ComentariosEN> comentarios, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ListaDeseosEN> listaDeseos, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.LineaPedidoEN> lineaPedido, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ValoracionClienteEN> valoracionCliente, int numValoraciones, double valoracionTotal
+public ProductoEN(int id, string nombre, string descripcion, double precio, int stock, Práctica3GenNHibernate.EN.Práctica3.GeneroEN genero, double valoracionMedia, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ComentariosEN> comentarios, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ListaDeseosEN> listaDeseos, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.LineaPedidoEN> lineaPedido, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ValoracionClienteEN> valoracionCliente, int numValoraciones, double valoracionTotal, string imagen
                   )
 {
-        this.init (Id, nombre, descripcion, precio, stock, genero, valoracionMedia, comentarios, listaDeseos, lineaPedido, valoracionCliente, numValoraciones, valoracionTotal);
+        this.init (Id, nombre, descripcion, precio, stock, genero, valoracionMedia, comentarios, listaDeseos, lineaPedido, valoracionCliente, numValoraciones, valoracionTotal, imagen);
 }
 
 
 public ProductoEN(ProductoEN producto)
 {
-        this.init (Id, producto.Nombre, producto.Descripcion, producto.Precio, producto.Stock, producto.Genero, producto.ValoracionMedia, producto.Comentarios, producto.ListaDeseos, producto.LineaPedido, producto.ValoracionCliente, producto.NumValoraciones, producto.ValoracionTotal);
+        this.init (Id, producto.Nombre, producto.Descripcion, producto.Precio, producto.Stock, producto.Genero, producto.ValoracionMedia, producto.Comentarios, producto.ListaDeseos, producto.LineaPedido, producto.ValoracionCliente, producto.NumValoraciones, producto.ValoracionTotal, producto.Imagen);
 }
 
 private void init (int id
-                   , string nombre, string descripcion, double precio, int stock, Práctica3GenNHibernate.EN.Práctica3.GeneroEN genero, double valoracionMedia, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ComentariosEN> comentarios, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ListaDeseosEN> listaDeseos, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.LineaPedidoEN> lineaPedido, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ValoracionClienteEN> valoracionCliente, int numValoraciones, double valoracionTotal)
+                   , string nombre, string descripcion, double precio, int stock, Práctica3GenNHibernate.EN.Práctica3.GeneroEN genero, double valoracionMedia, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ComentariosEN> comentarios, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ListaDeseosEN> listaDeseos, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.LineaPedidoEN> lineaPedido, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ValoracionClienteEN> valoracionCliente, int numValoraciones, double valoracionTotal, string imagen)
 {
         this.Id = id;
 
@@ -230,6 +243,8 @@ private void init (int id
         this.NumValoraciones = numValoraciones;
 
         this.ValoracionTotal = valoracionTotal;
+
+        this.Imagen = imagen;
 }
 
 public override bool Equals (object obj)
