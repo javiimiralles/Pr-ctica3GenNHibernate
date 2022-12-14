@@ -99,5 +99,9 @@ public System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.Pr
 {
         return _IProductoCAD.DameProductosPorGenero (p_genero);
 }
+public System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ProductoEN> DameListaFavoritosCliente (string p_oid_cliente)
+{
+        return _IProductoCAD.DameListaFavoritosCliente (p_oid_cliente);
+}
 }
 }

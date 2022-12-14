@@ -21,7 +21,7 @@ namespace Práctica3GenNHibernate.CP.Práctica3
 {
 public partial class ValoracionClienteCP : BasicCP
 {
-public Práctica3GenNHibernate.EN.Práctica3.ValoracionClienteEN New_ (double p_valoracion, string p_cliente, int p_producto)
+public Práctica3GenNHibernate.EN.Práctica3.ValoracionClienteEN New_ (double p_valoracion, string p_cliente, int p_producto, string p_comentario)
 {
         /*PROTECTED REGION ID(Práctica3GenNHibernate.CP.Práctica3_ValoracionCliente_new_) ENABLED START*/
 
@@ -50,6 +50,7 @@ public Práctica3GenNHibernate.EN.Práctica3.ValoracionClienteEN New_ (double p_
                 ValoracionClienteEN valoracionClienteEN;
                 valoracionClienteEN = new ValoracionClienteEN ();
                 valoracionClienteEN.Valoracion = p_valoracion;
+                valoracionClienteEN.Comentario = p_comentario;
 
 
                 if (p_cliente != null) {

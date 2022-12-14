@@ -22,17 +22,17 @@ namespace Web_DSM.Assemblers
             prod.Imagen = en.Imagen;
             prod.Comentarios = new List<string>();
             prod.NombreUsuario = new List<string>();
+            prod.IdValoracionCliente = new List<int>();
             prod.ValoracionCliente = new List<double>();
-
-            foreach (var comment in en.Comentarios)
-            {
-                prod.Comentarios.Add(comment.Comentario);
-                prod.NombreUsuario.Add(comment.Cliente.NombreUsuario);
-            }
+            prod.EmailUsuario = new List<string>();
 
             foreach (var valoracion in en.ValoracionCliente)
             {
                 prod.ValoracionCliente.Add(valoracion.Valoracion);
+                prod.IdValoracionCliente.Add(valoracion.Id);
+                prod.Comentarios.Add(valoracion.Comentario);
+                prod.NombreUsuario.Add(valoracion.Cliente.NombreUsuario);
+                prod.EmailUsuario.Add(valoracion.Cliente.Email);
             }
 
             return prod;

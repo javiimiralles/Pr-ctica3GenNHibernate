@@ -109,8 +109,6 @@ public void ModifyDefault (ProductoEN producto)
 
 
 
-
-
                 productoEN.NumValoraciones = producto.NumValoraciones;
 
 
@@ -118,6 +116,7 @@ public void ModifyDefault (ProductoEN producto)
 
 
                 productoEN.Imagen = producto.Imagen;
+
 
                 session.Update (productoEN);
                 SessionCommit ();
@@ -331,7 +330,7 @@ public System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.Pr
         try
         {
                 SessionInitializeTransaction ();
-                //String sql = @"FROM ProductoEN self where SELECT prod FROM ClienteEN as cli, ProductoEN as prod WHERE cli.GeneroFavorito = prod.Genero AND cli.Email = :p_oid_cliente";
+                //String sql = @"FROM ProductoEN self where SELECT prod FROM ClienteEN as cli, ProductoEN as prod WHERE cli.GeneroFav = prod.Genero AND cli.Email = :p_oid_cliente";
                 //IQuery query = session.CreateQuery(sql);
                 IQuery query = (IQuery)session.GetNamedQuery ("ProductoENobtenerProductosPorGeneroFavHQL");
                 query.SetParameter ("p_oid_cliente", p_oid_cliente);
@@ -396,6 +395,36 @@ public System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.Pr
                 //IQuery query = session.CreateQuery(sql);
                 IQuery query = (IQuery)session.GetNamedQuery ("ProductoENdameProductosPorGeneroHQL");
                 query.SetParameter ("p_genero", p_genero);
+
+                result = query.List<Práctica3GenNHibernate.EN.Práctica3.ProductoEN>();
+                SessionCommit ();
+        }
+
+        catch (Exception ex) {
+                SessionRollBack ();
+                if (ex is Práctica3GenNHibernate.Exceptions.ModelException)
+                        throw ex;
+                throw new Práctica3GenNHibernate.Exceptions.DataLayerException ("Error in ProductoCAD.", ex);
+        }
+
+
+        finally
+        {
+                SessionClose ();
+        }
+
+        return result;
+}
+public System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ProductoEN> DameListaFavoritosCliente (string p_oid_cliente)
+{
+        System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ProductoEN> result;
+        try
+        {
+                SessionInitializeTransaction ();
+                //String sql = @"FROM ProductoEN self where SELECT prod FROM ProductoEN as prod INNER JOIN prod.Cliente as cli WHERE cli.Email = :p_oid_cliente";
+                //IQuery query = session.CreateQuery(sql);
+                IQuery query = (IQuery)session.GetNamedQuery ("ProductoENdameListaFavoritosClienteHQL");
+                query.SetParameter ("p_oid_cliente", p_oid_cliente);
 
                 result = query.List<Práctica3GenNHibernate.EN.Práctica3.ProductoEN>();
                 SessionCommit ();

@@ -19,7 +19,7 @@ namespace Práctica3GenNHibernate.CEN.Práctica3
 {
 public partial class ClienteCEN
 {
-public string New_ (string p_email, string p_nombre, string p_apellidos, string p_nombreUsuario, int p_teléfono, String p_pass)
+public string New_ (string p_email, string p_nombre, string p_apellidos, string p_nombreUsuario, int p_teléfono, String p_pass, string p_genero_fav)
 {
         /*PROTECTED REGION ID(Práctica3GenNHibernate.CEN.Práctica3_Cliente_new__customized) ENABLED START*/
 
@@ -42,6 +42,8 @@ public string New_ (string p_email, string p_nombre, string p_apellidos, string 
         clienteEN.Pass = Utils.Util.GetEncondeMD5 (p_pass);
 
         clienteEN.Puntos = 0;
+
+        clienteEN.GeneroFav = p_genero_fav;
 
         //Call to ClienteCAD
 

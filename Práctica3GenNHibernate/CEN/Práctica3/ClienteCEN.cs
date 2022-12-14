@@ -39,7 +39,7 @@ public IClienteCAD get_IClienteCAD ()
         return this._IClienteCAD;
 }
 
-public void Modify (string p_Cliente_OID, string p_nombre, string p_apellidos, string p_nombreUsuario, int p_teléfono, String p_pass, int p_puntos)
+public void Modify (string p_Cliente_OID, string p_nombre, string p_apellidos, string p_nombreUsuario, int p_teléfono, String p_pass, int p_puntos, string p_generoFav)
 {
         ClienteEN clienteEN = null;
 
@@ -52,6 +52,7 @@ public void Modify (string p_Cliente_OID, string p_nombre, string p_apellidos, s
         clienteEN.Teléfono = p_teléfono;
         clienteEN.Pass = Utils.Util.GetEncondeMD5 (p_pass);
         clienteEN.Puntos = p_puntos;
+        clienteEN.GeneroFav = p_generoFav;
         //Call to ClienteCAD
 
         _IClienteCAD.Modify (clienteEN);
@@ -83,15 +84,21 @@ public System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.Cl
 {
         return _IClienteCAD.ObtenerClientesSinPuntos ();
 }
-public void AsignarGeneroFav (string p_Cliente_OID, string p_generoFavorito_OID)
-{
-        //Call to ClienteCAD
-
-        _IClienteCAD.AsignarGeneroFav (p_Cliente_OID, p_generoFavorito_OID);
-}
 public System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ClienteEN> DameClientesPorEmail (string p_email)
 {
         return _IClienteCAD.DameClientesPorEmail (p_email);
+}
+public void AgregarProductoFavorito (string p_Cliente_OID, System.Collections.Generic.IList<int> p_productoFavorito_OIDs)
+{
+        //Call to ClienteCAD
+
+        _IClienteCAD.AgregarProductoFavorito (p_Cliente_OID, p_productoFavorito_OIDs);
+}
+public void BorrarProductoFavorito (string p_Cliente_OID, System.Collections.Generic.IList<int> p_productoFavorito_OIDs)
+{
+        //Call to ClienteCAD
+
+        _IClienteCAD.BorrarProductoFavorito (p_Cliente_OID, p_productoFavorito_OIDs);
 }
 
 

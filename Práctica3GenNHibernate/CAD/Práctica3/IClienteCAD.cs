@@ -35,8 +35,11 @@ System.Collections.Generic.IList<ClienteEN> ReadAll (int first, int size);
 System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ClienteEN> ObtenerClientesSinPuntos ();
 
 
-void AsignarGeneroFav (string p_Cliente_OID, string p_generoFavorito_OID);
-
 System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ClienteEN> DameClientesPorEmail (string p_email);
+
+
+void AgregarProductoFavorito (string p_Cliente_OID, System.Collections.Generic.IList<int> p_productoFavorito_OIDs);
+
+void BorrarProductoFavorito (string p_Cliente_OID, System.Collections.Generic.IList<int> p_productoFavorito_OIDs);
 }
 }

@@ -27,6 +27,9 @@
 					<property name="Puntos" type="integer"> 
 						<column name="puntos"  not-null="true"/>
 					</property>
+					<property name="GeneroFav" type="string"> 
+						<column name="generoFav"  not-null="true"/>
+					</property>
 			
 			
 			
@@ -47,25 +50,6 @@
 					
 			
 		  			
-						<bag name="Comentarios" >
-							<key>
-							
-								
-								<column name="FK_email_idCliente"/>
-					      	</key>
-							<one-to-many class="Práctica3GenNHibernate.EN.Práctica3.ComentariosEN"/>
-					    </bag>
-					
-			
-		  			
-					
-							<many-to-one name="ListaDeseos" class="Práctica3GenNHibernate.EN.Práctica3.ListaDeseosEN" >
-								<column name="FK_id_idListaDeseos"/> 
-        					</many-to-one>
-					 
-						
-			
-		  			
 						<bag name="ValoracionCliente" >
 							<key>
 							
@@ -78,11 +62,16 @@
 			
 			
 		  			
-						<many-to-one name="GeneroFavorito" class="Práctica3GenNHibernate.EN.Práctica3.GeneroEN" >	
-								<column name="FK_nombre_idGenero"/> 
-						</many-to-one>
-											 					
-					
+						<bag name="ProductoFavorito" table="[producto_cliente]" inverse="true" >
+							<key>
+								
+									<column name="FK_email_idCliente"/> 
+							</key>
+      						<many-to-many class="Práctica3GenNHibernate.EN.Práctica3.ProductoEN">
+									<column name="FK_id_idProductoFavorito"/> 
+      						</many-to-many>
+    					</bag>
+			
 					
 					
 					

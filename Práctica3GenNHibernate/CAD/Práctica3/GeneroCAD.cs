@@ -91,7 +91,6 @@ public void ModifyDefault (GeneroEN genero)
                 SessionInitializeTransaction ();
                 GeneroEN generoEN = (GeneroEN)session.Load (typeof(GeneroEN), genero.Nombre);
 
-
                 session.Update (generoEN);
                 SessionCommit ();
         }

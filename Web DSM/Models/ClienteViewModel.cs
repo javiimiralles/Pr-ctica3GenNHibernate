@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Práctica3GenNHibernate.CEN.Práctica3;
+using Práctica3GenNHibernate.EN.Práctica3;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -24,5 +26,10 @@ namespace Web_DSM.Models
         [Display(Name = "Teléfono")]
         [DataType(DataType.PhoneNumber)]
         public string Telefono { get; set; }
+
+        [Required]
+        [Display(Name = "Género musical favorito")]
+        public string Genero { get; set; }
     }
+
 }

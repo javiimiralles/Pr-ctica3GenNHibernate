@@ -29,5 +29,11 @@ ListaDeseosEN ReadOID (int id
 
 
 System.Collections.Generic.IList<ListaDeseosEN> ReadAll (int first, int size);
+
+
+System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ListaDeseosEN> DameListaDeseosDeCliente (string p_oid_cliente);
+
+
+void AgregarProducto (int p_listaDeseos_oid, int p_producto_oid);
 }
 }

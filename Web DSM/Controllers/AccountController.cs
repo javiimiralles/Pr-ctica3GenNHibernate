@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
@@ -9,12 +10,14 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Práctica3GenNHibernate.CEN.Práctica3;
+using Práctica3GenNHibernate.Controllers;
+using Práctica3GenNHibernate.EN.Práctica3;
 using Web_DSM.Models;
 
 namespace Web_DSM.Controllers
 {
     [Authorize]
-    public class AccountController : Controller
+    public class AccountController : BasicController
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
@@ -82,6 +85,13 @@ namespace Web_DSM.Controllers
                 case SignInStatus.Success:
                     ClienteCEN cliente = new ClienteCEN();
                     string token = cliente.Login(model.Email, model.Password);
+
+                    IList<ClienteEN> listaClientes = cliente.DameClientesPorEmail(model.Email);
+                    if(listaClientes.Count > 0)
+                    {
+                        Session["usuario"] = listaClientes[0];
+                    }
+
                     if(token != null)
                     {
                         return RedirectToLocal(returnUrl);
@@ -151,6 +161,15 @@ namespace Web_DSM.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
+            IList<GeneroEN> listaGeneros = new GeneroCEN().ReadAll(0, -1);
+            IList<SelectListItem> generosItems = new List<SelectListItem>();
+            foreach (GeneroEN genero in listaGeneros)
+            {
+                generosItems.Add(new SelectListItem { Text = genero.Nombre, Value = genero.Nombre.ToString() });
+            }
+
+            ViewData["Genero"] = generosItems;
+
             return View();
         }
 
@@ -167,17 +186,19 @@ namespace Web_DSM.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
                     ClienteCEN clienteCEN = new ClienteCEN();
-                    clienteCEN.New_(model.Email, model.Nombre, model.Apellidos, model.NombreUsuario, int.Parse(model.Telefono), model.Password);
+                    clienteCEN.New_(model.Email, model.Nombre, model.Apellidos, model.NombreUsuario, int.Parse(model.Telefono), model.Password, model.Genero);
+
+                    Session["usuario"] = clienteCEN.ReadOID(model.Email); 
                     // Para obtener más información sobre cómo habilitar la confirmación de cuentas y el restablecimiento de contraseña, visite https://go.microsoft.com/fwlink/?LinkID=320771
                     // Enviar correo electrónico con este vínculo
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirmar cuenta", "Para confirmar la cuenta, haga clic <a href=\"" + callbackUrl + "\">aquí</a>");
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Producto");
                 }
                 AddErrors(result);
             }
@@ -406,7 +427,7 @@ namespace Web_DSM.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Producto");
         }
 
         //
@@ -463,7 +484,7 @@ namespace Web_DSM.Controllers
             {
                 return Redirect(returnUrl);
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Producto");
         }
 
         internal class ChallengeResult : HttpUnauthorizedResult

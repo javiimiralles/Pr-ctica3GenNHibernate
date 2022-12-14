@@ -95,6 +95,9 @@ public void ModifyDefault (ValoracionClienteEN valoracionCliente)
 
 
 
+
+                valoracionClienteEN.Comentario = valoracionCliente.Comentario;
+
                 session.Update (valoracionClienteEN);
                 SessionCommit ();
         }
@@ -162,6 +165,9 @@ public void Modify (ValoracionClienteEN valoracionCliente)
                 ValoracionClienteEN valoracionClienteEN = (ValoracionClienteEN)session.Load (typeof(ValoracionClienteEN), valoracionCliente.Id);
 
                 valoracionClienteEN.Valoracion = valoracionCliente.Valoracion;
+
+
+                valoracionClienteEN.Comentario = valoracionCliente.Comentario;
 
                 session.Update (valoracionClienteEN);
                 SessionCommit ();

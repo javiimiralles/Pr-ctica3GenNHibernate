@@ -40,8 +40,46 @@ namespace Web_DSM.Controllers
             return View(prod);
         }
 
-        // GET: /ArticuloViewModels/Categoria/5
+        // GET: /ProductoViewModels/productoFavorito/5
+        public ActionResult ListaFavoritos()
+        {
+            SessionInitialize();
+            ProductoCAD prodCAD = new ProductoCAD(session);
+            ProductoCEN prodCEN = new ProductoCEN(prodCAD);
+            string emailCliente = ((ClienteEN)Session["usuario"]).Email;
+            IList<ProductoEN> listProdEn = prodCEN.DameListaFavoritosCliente(emailCliente);
+            IEnumerable<ProductoViewModel> listViewModel = new ProductoAssembler().ConvertListENToModel(listProdEn).ToList();
 
+            SessionClose();
+
+            return View(listViewModel);
+        }
+
+        // POST: ListaFavoritos/Create
+       
+        public ActionResult AnyadirAFavoritos(int idProducto)
+        {
+            ClienteCEN cliCEN = new ClienteCEN();
+            string emailCliente = ((ClienteEN)Session["usuario"]).Email;
+            IList<int> idProds = new List<int>();
+            idProds.Add(idProducto);
+            cliCEN.AgregarProductoFavorito(emailCliente, idProds);
+
+            return RedirectToAction("Details", "Producto", new { id = idProducto });
+        }
+
+        public ActionResult QuitarDeFavoritos(int idProducto)
+        {
+            ClienteCEN cliCEN = new ClienteCEN();
+            string emailCliente = ((ClienteEN)Session["usuario"]).Email;
+            IList<int> idProds = new List<int>();
+            idProds.Add(idProducto);
+            cliCEN.BorrarProductoFavorito(emailCliente, idProds);
+
+            return RedirectToAction("Details", "Producto", new { id = idProducto });
+        }
+
+        // GET: /ProductoViewModels/Genero/5
         public ActionResult PorGenero(string genero)
         {
             SessionInitialize();

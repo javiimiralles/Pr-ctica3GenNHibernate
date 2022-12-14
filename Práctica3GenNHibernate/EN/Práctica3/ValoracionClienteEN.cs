@@ -33,6 +33,13 @@ private Práctica3GenNHibernate.EN.Práctica3.ProductoEN producto;
 
 
 
+/**
+ *	Atributo comentario
+ */
+private string comentario;
+
+
+
 
 
 
@@ -60,6 +67,12 @@ public virtual Práctica3GenNHibernate.EN.Práctica3.ProductoEN Producto {
 
 
 
+public virtual string Comentario {
+        get { return comentario; } set { comentario = value;  }
+}
+
+
+
 
 
 public ValoracionClienteEN()
@@ -68,20 +81,20 @@ public ValoracionClienteEN()
 
 
 
-public ValoracionClienteEN(int id, double valoracion, Práctica3GenNHibernate.EN.Práctica3.ClienteEN cliente, Práctica3GenNHibernate.EN.Práctica3.ProductoEN producto
+public ValoracionClienteEN(int id, double valoracion, Práctica3GenNHibernate.EN.Práctica3.ClienteEN cliente, Práctica3GenNHibernate.EN.Práctica3.ProductoEN producto, string comentario
                            )
 {
-        this.init (Id, valoracion, cliente, producto);
+        this.init (Id, valoracion, cliente, producto, comentario);
 }
 
 
 public ValoracionClienteEN(ValoracionClienteEN valoracionCliente)
 {
-        this.init (Id, valoracionCliente.Valoracion, valoracionCliente.Cliente, valoracionCliente.Producto);
+        this.init (Id, valoracionCliente.Valoracion, valoracionCliente.Cliente, valoracionCliente.Producto, valoracionCliente.Comentario);
 }
 
 private void init (int id
-                   , double valoracion, Práctica3GenNHibernate.EN.Práctica3.ClienteEN cliente, Práctica3GenNHibernate.EN.Práctica3.ProductoEN producto)
+                   , double valoracion, Práctica3GenNHibernate.EN.Práctica3.ClienteEN cliente, Práctica3GenNHibernate.EN.Práctica3.ProductoEN producto, string comentario)
 {
         this.Id = id;
 
@@ -91,6 +104,8 @@ private void init (int id
         this.Cliente = cliente;
 
         this.Producto = producto;
+
+        this.Comentario = comentario;
 }
 
 public override bool Equals (object obj)

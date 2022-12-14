@@ -7,6 +7,7 @@
     <title>@ViewBag.Title - Mi aplicación ASP.NET</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @using Práctica3GenNHibernate.EN.Práctica3;
     <link rel="stylesheet" href="~/Content/styles.css" type="text/css" />
 
 </head>
@@ -24,6 +25,10 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Inicio", "Index", "Producto")</li>
+                    @if (Session["usuario"] != null)
+                    {
+                        <li>@Html.ActionLink("Favoritos", "ListaFavoritos", "Producto")</li>
+                    }
                     <li>@Html.ActionLink("Acerca de", "About", "Home")</li>
                     <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
                 </ul>
@@ -35,7 +40,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - Mi aplicación ASP.NET</p>
+            <p>&copy; @DateTime.Now.Year - Melody RecordsT</p>
         </footer>
     </div>
 

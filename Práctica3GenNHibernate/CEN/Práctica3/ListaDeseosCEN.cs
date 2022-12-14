@@ -94,5 +94,15 @@ public System.Collections.Generic.IList<ListaDeseosEN> ReadAll (int first, int s
         list = _IListaDeseosCAD.ReadAll (first, size);
         return list;
 }
+public System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ListaDeseosEN> DameListaDeseosDeCliente (string p_oid_cliente)
+{
+        return _IListaDeseosCAD.DameListaDeseosDeCliente (p_oid_cliente);
+}
+public void AgregarProducto (int p_listaDeseos_oid, int p_producto_oid)
+{
+        //Call to ListaDeseosCAD
+
+        _IListaDeseosCAD.AgregarProducto (p_listaDeseos_oid, p_producto_oid);
+}
 }
 }

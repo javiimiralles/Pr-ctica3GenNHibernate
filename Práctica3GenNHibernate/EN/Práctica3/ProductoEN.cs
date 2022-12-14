@@ -55,20 +55,6 @@ private double valoracionMedia;
 
 
 /**
- *	Atributo comentarios
- */
-private System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ComentariosEN> comentarios;
-
-
-
-/**
- *	Atributo listaDeseos
- */
-private System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ListaDeseosEN> listaDeseos;
-
-
-
-/**
  *	Atributo lineaPedido
  */
 private System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.LineaPedidoEN> lineaPedido;
@@ -100,6 +86,13 @@ private double valoracionTotal;
  *	Atributo imagen
  */
 private string imagen;
+
+
+
+/**
+ *	Atributo cliente
+ */
+private System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ClienteEN> cliente;
 
 
 
@@ -148,18 +141,6 @@ public virtual double ValoracionMedia {
 
 
 
-public virtual System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ComentariosEN> Comentarios {
-        get { return comentarios; } set { comentarios = value;  }
-}
-
-
-
-public virtual System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ListaDeseosEN> ListaDeseos {
-        get { return listaDeseos; } set { listaDeseos = value;  }
-}
-
-
-
 public virtual System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.LineaPedidoEN> LineaPedido {
         get { return lineaPedido; } set { lineaPedido = value;  }
 }
@@ -190,32 +171,37 @@ public virtual string Imagen {
 
 
 
-
-
-public ProductoEN()
-{
-        comentarios = new System.Collections.Generic.List<Práctica3GenNHibernate.EN.Práctica3.ComentariosEN>();
-        listaDeseos = new System.Collections.Generic.List<Práctica3GenNHibernate.EN.Práctica3.ListaDeseosEN>();
-        lineaPedido = new System.Collections.Generic.List<Práctica3GenNHibernate.EN.Práctica3.LineaPedidoEN>();
-        valoracionCliente = new System.Collections.Generic.List<Práctica3GenNHibernate.EN.Práctica3.ValoracionClienteEN>();
+public virtual System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ClienteEN> Cliente {
+        get { return cliente; } set { cliente = value;  }
 }
 
 
 
-public ProductoEN(int id, string nombre, string descripcion, double precio, int stock, Práctica3GenNHibernate.EN.Práctica3.GeneroEN genero, double valoracionMedia, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ComentariosEN> comentarios, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ListaDeseosEN> listaDeseos, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.LineaPedidoEN> lineaPedido, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ValoracionClienteEN> valoracionCliente, int numValoraciones, double valoracionTotal, string imagen
+
+
+public ProductoEN()
+{
+        lineaPedido = new System.Collections.Generic.List<Práctica3GenNHibernate.EN.Práctica3.LineaPedidoEN>();
+        valoracionCliente = new System.Collections.Generic.List<Práctica3GenNHibernate.EN.Práctica3.ValoracionClienteEN>();
+        cliente = new System.Collections.Generic.List<Práctica3GenNHibernate.EN.Práctica3.ClienteEN>();
+}
+
+
+
+public ProductoEN(int id, string nombre, string descripcion, double precio, int stock, Práctica3GenNHibernate.EN.Práctica3.GeneroEN genero, double valoracionMedia, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.LineaPedidoEN> lineaPedido, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ValoracionClienteEN> valoracionCliente, int numValoraciones, double valoracionTotal, string imagen, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ClienteEN> cliente
                   )
 {
-        this.init (Id, nombre, descripcion, precio, stock, genero, valoracionMedia, comentarios, listaDeseos, lineaPedido, valoracionCliente, numValoraciones, valoracionTotal, imagen);
+        this.init (Id, nombre, descripcion, precio, stock, genero, valoracionMedia, lineaPedido, valoracionCliente, numValoraciones, valoracionTotal, imagen, cliente);
 }
 
 
 public ProductoEN(ProductoEN producto)
 {
-        this.init (Id, producto.Nombre, producto.Descripcion, producto.Precio, producto.Stock, producto.Genero, producto.ValoracionMedia, producto.Comentarios, producto.ListaDeseos, producto.LineaPedido, producto.ValoracionCliente, producto.NumValoraciones, producto.ValoracionTotal, producto.Imagen);
+        this.init (Id, producto.Nombre, producto.Descripcion, producto.Precio, producto.Stock, producto.Genero, producto.ValoracionMedia, producto.LineaPedido, producto.ValoracionCliente, producto.NumValoraciones, producto.ValoracionTotal, producto.Imagen, producto.Cliente);
 }
 
 private void init (int id
-                   , string nombre, string descripcion, double precio, int stock, Práctica3GenNHibernate.EN.Práctica3.GeneroEN genero, double valoracionMedia, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ComentariosEN> comentarios, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ListaDeseosEN> listaDeseos, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.LineaPedidoEN> lineaPedido, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ValoracionClienteEN> valoracionCliente, int numValoraciones, double valoracionTotal, string imagen)
+                   , string nombre, string descripcion, double precio, int stock, Práctica3GenNHibernate.EN.Práctica3.GeneroEN genero, double valoracionMedia, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.LineaPedidoEN> lineaPedido, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ValoracionClienteEN> valoracionCliente, int numValoraciones, double valoracionTotal, string imagen, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ClienteEN> cliente)
 {
         this.Id = id;
 
@@ -232,10 +218,6 @@ private void init (int id
 
         this.ValoracionMedia = valoracionMedia;
 
-        this.Comentarios = comentarios;
-
-        this.ListaDeseos = listaDeseos;
-
         this.LineaPedido = lineaPedido;
 
         this.ValoracionCliente = valoracionCliente;
@@ -245,6 +227,8 @@ private void init (int id
         this.ValoracionTotal = valoracionTotal;
 
         this.Imagen = imagen;
+
+        this.Cliente = cliente;
 }
 
 public override bool Equals (object obj)

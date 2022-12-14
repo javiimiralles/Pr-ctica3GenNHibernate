@@ -108,10 +108,11 @@ public void ModifyDefault (ClienteEN cliente)
 
 
 
-
-
                 clienteEN.Puntos = cliente.Puntos;
 
+
+
+                clienteEN.GeneroFav = cliente.GeneroFav;
 
                 session.Update (clienteEN);
                 SessionCommit ();
@@ -181,6 +182,9 @@ public void Modify (ClienteEN cliente)
 
 
                 clienteEN.Puntos = cliente.Puntos;
+
+
+                clienteEN.GeneroFav = cliente.GeneroFav;
 
                 session.Update (clienteEN);
                 SessionCommit ();
@@ -313,37 +317,6 @@ public System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.Cl
 
         return result;
 }
-public void AsignarGeneroFav (string p_Cliente_OID, string p_generoFavorito_OID)
-{
-        Práctica3GenNHibernate.EN.Práctica3.ClienteEN clienteEN = null;
-        try
-        {
-                SessionInitializeTransaction ();
-                clienteEN = (ClienteEN)session.Load (typeof(ClienteEN), p_Cliente_OID);
-                clienteEN.GeneroFavorito = (Práctica3GenNHibernate.EN.Práctica3.GeneroEN)session.Load (typeof(Práctica3GenNHibernate.EN.Práctica3.GeneroEN), p_generoFavorito_OID);
-
-                clienteEN.GeneroFavorito.Cliente.Add (clienteEN);
-
-
-
-                session.Update (clienteEN);
-                SessionCommit ();
-        }
-
-        catch (Exception ex) {
-                SessionRollBack ();
-                if (ex is Práctica3GenNHibernate.Exceptions.ModelException)
-                        throw ex;
-                throw new Práctica3GenNHibernate.Exceptions.DataLayerException ("Error in ClienteCAD.", ex);
-        }
-
-
-        finally
-        {
-                SessionClose ();
-        }
-}
-
 public System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ClienteEN> DameClientesPorEmail (string p_email)
 {
         System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ClienteEN> result;
@@ -373,6 +346,83 @@ public System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.Cl
         }
 
         return result;
+}
+public void AgregarProductoFavorito (string p_Cliente_OID, System.Collections.Generic.IList<int> p_productoFavorito_OIDs)
+{
+        Práctica3GenNHibernate.EN.Práctica3.ClienteEN clienteEN = null;
+        try
+        {
+                SessionInitializeTransaction ();
+                clienteEN = (ClienteEN)session.Load (typeof(ClienteEN), p_Cliente_OID);
+                Práctica3GenNHibernate.EN.Práctica3.ProductoEN productoFavoritoENAux = null;
+                if (clienteEN.ProductoFavorito == null) {
+                        clienteEN.ProductoFavorito = new System.Collections.Generic.List<Práctica3GenNHibernate.EN.Práctica3.ProductoEN>();
+                }
+
+                foreach (int item in p_productoFavorito_OIDs) {
+                        productoFavoritoENAux = new Práctica3GenNHibernate.EN.Práctica3.ProductoEN ();
+                        productoFavoritoENAux = (Práctica3GenNHibernate.EN.Práctica3.ProductoEN)session.Load (typeof(Práctica3GenNHibernate.EN.Práctica3.ProductoEN), item);
+                        productoFavoritoENAux.Cliente.Add (clienteEN);
+
+                        clienteEN.ProductoFavorito.Add (productoFavoritoENAux);
+                }
+
+
+                session.Update (clienteEN);
+                SessionCommit ();
+        }
+
+        catch (Exception ex) {
+                SessionRollBack ();
+                if (ex is Práctica3GenNHibernate.Exceptions.ModelException)
+                        throw ex;
+                throw new Práctica3GenNHibernate.Exceptions.DataLayerException ("Error in ClienteCAD.", ex);
+        }
+
+
+        finally
+        {
+                SessionClose ();
+        }
+}
+
+public void BorrarProductoFavorito (string p_Cliente_OID, System.Collections.Generic.IList<int> p_productoFavorito_OIDs)
+{
+        try
+        {
+                SessionInitializeTransaction ();
+                Práctica3GenNHibernate.EN.Práctica3.ClienteEN clienteEN = null;
+                clienteEN = (ClienteEN)session.Load (typeof(ClienteEN), p_Cliente_OID);
+
+                Práctica3GenNHibernate.EN.Práctica3.ProductoEN productoFavoritoENAux = null;
+                if (clienteEN.ProductoFavorito != null) {
+                        foreach (int item in p_productoFavorito_OIDs) {
+                                productoFavoritoENAux = (Práctica3GenNHibernate.EN.Práctica3.ProductoEN)session.Load (typeof(Práctica3GenNHibernate.EN.Práctica3.ProductoEN), item);
+                                if (clienteEN.ProductoFavorito.Contains (productoFavoritoENAux) == true) {
+                                        clienteEN.ProductoFavorito.Remove (productoFavoritoENAux);
+                                        productoFavoritoENAux.Cliente.Remove (clienteEN);
+                                }
+                                else
+                                        throw new ModelException ("The identifier " + item + " in p_productoFavorito_OIDs you are trying to unrelationer, doesn't exist in ClienteEN");
+                        }
+                }
+
+                session.Update (clienteEN);
+                SessionCommit ();
+        }
+
+        catch (Exception ex) {
+                SessionRollBack ();
+                if (ex is Práctica3GenNHibernate.Exceptions.ModelException)
+                        throw ex;
+                throw new Práctica3GenNHibernate.Exceptions.DataLayerException ("Error in ClienteCAD.", ex);
+        }
+
+
+        finally
+        {
+                SessionClose ();
+        }
 }
 }
 }

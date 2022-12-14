@@ -22,18 +22,6 @@
 							<one-to-many class="Práctica3GenNHibernate.EN.Práctica3.ProductoEN"/>
 					    </bag>
 					
-			
-		  			
-						<bag name="Cliente" >
-							<key>
-							
-								
-								<column name="FK_nombre_idGenero"/>
-					      	</key>
-							<one-to-many class="Práctica3GenNHibernate.EN.Práctica3.ClienteEN"/>
-					    </bag>
-					
-					
 					
 					
 		

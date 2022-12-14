@@ -6,7 +6,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InitializeDB", "InitializeD
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Práctica3GenNHibernate", "Práctica3GenNHibernate\Práctica3GenNHibernate.csproj", "{66C66636-FD6A-4A3F-A7C5-FE88BBA117AF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web DSM", "Web DSM\Web DSM.csproj", "{6EA5C180-484B-45A9-A420-43A02D2568AE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebDSM", "Web DSM\WebDSM.csproj", "{6EA5C180-484B-45A9-A420-43A02D2568AE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -128,6 +128,7 @@
 			
 			
 			
+			
 	<Compile Include="EN\Práctica3\PedidoEN.cs" />
 	<Compile Include="CEN\Práctica3\PedidoCEN.cs" />
 	<Compile Include="CAD\Práctica3\IPedidoCAD.cs" />
@@ -165,31 +166,12 @@
 			
 			
 			
+			
 	<Compile Include="EN\Práctica3\GeneroEN.cs" />
 	<Compile Include="CEN\Práctica3\GeneroCEN.cs" />
 	<Compile Include="CAD\Práctica3\IGeneroCAD.cs" />
 	<Compile Include="CAD\Práctica3\GeneroCAD.cs" />
 	<Compile Include="CP\Práctica3\GeneroCP.cs" />
-			
-			
-			
-			
-			
-	<Compile Include="EN\Práctica3\ComentariosEN.cs" />
-	<Compile Include="CEN\Práctica3\ComentariosCEN.cs" />
-	<Compile Include="CAD\Práctica3\IComentariosCAD.cs" />
-	<Compile Include="CAD\Práctica3\ComentariosCAD.cs" />
-	<Compile Include="CP\Práctica3\ComentariosCP.cs" />
-			
-			
-			
-			
-			
-	<Compile Include="EN\Práctica3\ListaDeseosEN.cs" />
-	<Compile Include="CEN\Práctica3\ListaDeseosCEN.cs" />
-	<Compile Include="CAD\Práctica3\IListaDeseosCAD.cs" />
-	<Compile Include="CAD\Práctica3\ListaDeseosCAD.cs" />
-	<Compile Include="CP\Práctica3\ListaDeseosCP.cs" />
 			
 			
 			
@@ -237,8 +219,6 @@
 	<EmbeddedResource Include="Mappings\Práctica3\pedido.hbm.xml" />
 	<EmbeddedResource Include="Mappings\Práctica3\producto.hbm.xml" />
 	<EmbeddedResource Include="Mappings\Práctica3\genero.hbm.xml" />
-	<EmbeddedResource Include="Mappings\Práctica3\comentarios.hbm.xml" />
-	<EmbeddedResource Include="Mappings\Práctica3\listadeseos.hbm.xml" />
 	<EmbeddedResource Include="Mappings\Práctica3\lineapedido.hbm.xml" />
 	<EmbeddedResource Include="Mappings\Práctica3\valoracioncliente.hbm.xml" />
 	

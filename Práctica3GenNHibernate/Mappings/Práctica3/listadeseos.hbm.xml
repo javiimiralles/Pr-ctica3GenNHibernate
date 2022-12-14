@@ -38,5 +38,6 @@
 		 </class>	
 		  
 		  <query name="ListaDeseosENReadAllHQL">from ListaDeseosEN</query>
+		  <query name="ListaDeseosENdameListaDeseosDeClienteHQL"><![CDATA[SELECT prod FROM ListaDeseosEN as li, ProductoEN as prod, ClienteEN as cli WHERE li.Cliente = :p_oid_cliente AND li.Id = prod.ListaDeseos]]></query>
 		</hibernate-mapping>
 	

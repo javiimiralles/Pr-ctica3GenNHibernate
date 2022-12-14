@@ -90,11 +90,11 @@ public static void InitializeData ()
 
                 //Creacion de clientes
                 ClienteCEN clienteCEN = new ClienteCEN ();
-                clienteCEN.New_ ("paco@gmail.com", "Paco", "Gomez Miralles", "pacogo", 777777777, "1234");
-                clienteCEN.New_ ("pere@gmail.com", "Pere", "Milla", "pere", 777777777, "1234");
-                clienteCEN.New_ ("lucas@gmail.com", "Lucas", "Boye", "lucasbo", 777777777, "1234");
+                clienteCEN.New_ ("paco@gmail.com", "Paco", "Gomez Miralles", "pacogo", 777777777, "1234aA.", "Rock");
+                clienteCEN.New_ ("pere@gmail.com", "Pere", "Milla", "pere", 777777777, "1234aA.", "Pop");
+                clienteCEN.New_ ("lucas@gmail.com", "Lucas", "Boye", "lucasbo", 777777777, "1234aA.", "Rap");
 
-                clienteCEN.AsignarGeneroFav ("paco@gmail.com", "Rock");
+                //clienteCEN.AsignarGeneroFav ("paco@gmail.com", "Rock");
 
                 //Creacion de pedidos
                 PedidoCEN pedidoCEN = new PedidoCEN ();
@@ -127,60 +127,37 @@ public static void InitializeData ()
                 linPedCP.New_ (idProd1, idPed3, 6);
 
                 //Creacion de listas de deseos
-                ListaDeseosCEN listaCEN = new ListaDeseosCEN ();
-                listaCEN.New_ ("paco@gmail.com");
-
-                //Creacion de comentarios
-                ComentariosCEN comentCEN = new ComentariosCEN ();
-                comentCEN.New_ ("Muy buen producto", "paco@gmail.com", idProd1);
-                comentCEN.New_("No está mal", "lucas@gmail.com", idProd1);
-                comentCEN.New_("No me ha gustado mucho", "pere@gmail.com", idProd1);
-
-                comentCEN.New_("Muy buen producto", "paco@gmail.com", idProd2);
-                comentCEN.New_("No está mal", "lucas@gmail.com", idProd2);
-                comentCEN.New_("Me ha gustado mucho", "pere@gmail.com", idProd2);
-
-                comentCEN.New_("Horrible", "paco@gmail.com", idProd3);
-                comentCEN.New_("No lo recomiendo", "lucas@gmail.com", idProd3);
-                comentCEN.New_("No me ha gustado nada", "pere@gmail.com", idProd3);
-
-                comentCEN.New_("Muy ha encantado, lo recomiendo", "paco@gmail.com", idProd4);
-                comentCEN.New_("Me gusta", "lucas@gmail.com", idProd4);
-                comentCEN.New_("Está genial", "pere@gmail.com", idProd4);
-
-                comentCEN.New_("No lo compren", "paco@gmail.com", idProd5);
-                comentCEN.New_("No me ha gustado nada", "lucas@gmail.com", idProd5);
-                comentCEN.New_("Decepcionante", "pere@gmail.com", idProd5);
-
-                comentCEN.New_("Me ha gustado", "paco@gmail.com", idProd6);
-                comentCEN.New_("No está nada mal", "lucas@gmail.com", idProd6);
-                comentCEN.New_("Aceptable", "pere@gmail.com", idProd6);
+                IList<int> listaFavoritos = new List<int>();
+                listaFavoritos.Add (idProd1);
+                listaFavoritos.Add (idProd2);
+                listaFavoritos.Add (idProd3);
+                clienteCEN.AgregarProductoFavorito ("paco@gmail.com", listaFavoritos);
 
                 //Creacion de valoraciones de usuarios
                 ValoracionClienteCP valCP = new ValoracionClienteCP ();
-                valCP.New_ (4.5, "paco@gmail.com", idProd1);
-                valCP.New_ (3, "lucas@gmail.com", idProd1);
-                valCP.New_ (2, "pere@gmail.com", idProd1);
+                valCP.New_ (4.5, "paco@gmail.com", idProd1, "Muy buen producto");
+                valCP.New_ (3, "lucas@gmail.com", idProd1, "No está mal");
+                valCP.New_ (2, "pere@gmail.com", idProd1, "No me ha gustado mucho");
 
-                valCP.New_ (4, "paco@gmail.com", idProd2);
-                valCP.New_ (3, "lucas@gmail.com", idProd2);
-                valCP.New_ (4, "pere@gmail.com", idProd2);
+                valCP.New_ (4, "paco@gmail.com", idProd2, "Muy buen producto");
+                valCP.New_ (3, "lucas@gmail.com", idProd2, "No está mal");
+                valCP.New_ (4, "pere@gmail.com", idProd2, "Me ha gustado mucho");
 
-                valCP.New_ (1, "paco@gmail.com", idProd3);
-                valCP.New_ (2, "lucas@gmail.com", idProd3);
-                valCP.New_ (1, "pere@gmail.com", idProd3);
+                valCP.New_ (1, "paco@gmail.com", idProd3, "Horrible");
+                valCP.New_ (2, "lucas@gmail.com", idProd3, "No lo recomiendo");
+                valCP.New_ (1, "pere@gmail.com", idProd3, "No me ha gustado nada");
 
-                valCP.New_(5, "paco@gmail.com", idProd4);
-                valCP.New_(3, "lucas@gmail.com", idProd4);
-                valCP.New_(4, "pere@gmail.com", idProd4);
+                valCP.New_ (5, "paco@gmail.com", idProd4, "Muy ha encantado, lo recomiendo");
+                valCP.New_ (3, "lucas@gmail.com", idProd4, "Me gusta");
+                valCP.New_ (4, "pere@gmail.com", idProd4, "Está genial");
 
-                valCP.New_(1, "paco@gmail.com", idProd5);
-                valCP.New_(1, "lucas@gmail.com", idProd5);
-                valCP.New_(2, "pere@gmail.com", idProd5);
+                valCP.New_ (1, "paco@gmail.com", idProd5, "No lo compren");
+                valCP.New_ (1, "lucas@gmail.com", idProd5, "No me ha gustado nada");
+                valCP.New_ (2, "pere@gmail.com", idProd5, "Decepcionante");
 
-                valCP.New_(3, "paco@gmail.com", idProd6);
-                valCP.New_(3, "lucas@gmail.com", idProd6);
-                valCP.New_(3, "pere@gmail.com", idProd6);
+                valCP.New_ (3, "paco@gmail.com", idProd6, "Me ha gustado");
+                valCP.New_ (3, "lucas@gmail.com", idProd6, "No está nada mal");
+                valCP.New_ (3, "pere@gmail.com", idProd6, "Aceptable");
 
                 //-----------------Probamos los metodos creados-----------------------------
                 //Incrementar y decrementar stock
@@ -269,6 +246,21 @@ public static void InitializeData ()
                         Console.WriteLine (prod.Nombre);
                 }
 
+                //dameListaFavoritos
+
+                Console.WriteLine ("-------------------Obtener lista de favoritos de un cliente------------------------");
+                IList<ProductoEN> listaDeseos1 = prodCEN.DameListaFavoritosCliente ("paco@gmail.com");
+                Console.WriteLine ("Lista de deseos de paco@gmail.com");
+                foreach (ProductoEN prod in listaDeseos1) {
+                        Console.WriteLine (prod.Nombre);
+                }
+                /*
+                 * IList<ProductoEN> listaDeseos2 = (IList<ProductoEN>)listaCEN.DameListaDeseosDeCliente ("lucas@gmail.com");
+                 * Console.WriteLine ("Lista de deseos de lucas@gmail.com");
+                 * foreach (ProductoEN prod in listaDeseos2) {
+                 *      Console.WriteLine (prod.Nombre);
+                 * }
+                 */
 
                 /*PROTECTED REGION END*/
         }

@@ -39,7 +39,7 @@ public IValoracionClienteCAD get_IValoracionClienteCAD ()
         return this._IValoracionClienteCAD;
 }
 
-public void Modify (int p_ValoracionCliente_OID, double p_valoracion)
+public void Modify (int p_ValoracionCliente_OID, double p_valoracion, string p_comentario)
 {
         ValoracionClienteEN valoracionClienteEN = null;
 
@@ -47,6 +47,7 @@ public void Modify (int p_ValoracionCliente_OID, double p_valoracion)
         valoracionClienteEN = new ValoracionClienteEN ();
         valoracionClienteEN.Id = p_ValoracionCliente_OID;
         valoracionClienteEN.Valoracion = p_valoracion;
+        valoracionClienteEN.Comentario = p_comentario;
         //Call to ValoracionClienteCAD
 
         _IValoracionClienteCAD.Modify (valoracionClienteEN);

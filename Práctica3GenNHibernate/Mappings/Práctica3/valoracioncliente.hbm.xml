@@ -15,6 +15,9 @@
 					<property name="Valoracion" type="double"> 
 						<column name="valoracion"  not-null="true"/>
 					</property>
+					<property name="Comentario" type="string"> 
+						<column name="comentario"  not-null="true"/>
+					</property>
 			
 			
 			
@@ -30,6 +33,8 @@
 								<column name="FK_id_idProducto"/> 
 						</many-to-one>
 											 					
+			
+					
 					
 					
 					

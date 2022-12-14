@@ -23,13 +23,13 @@ public string Login (string p_Cliente_OID, string p_pass)
 {
         /*PROTECTED REGION ID(Práctica3GenNHibernate.CEN.Práctica3_Cliente_login) ENABLED START*/
         string result = null;
-        IList<ClienteEN> listaEn = DameClientesPorEmail(p_Cliente_OID);
 
-        if(listaEn.Count > 0)
-        {
-            ClienteEN en = listaEn[0];
-            if (en.Pass.Equals (Utils.Util.GetEncondeMD5 (p_pass)))
-                    result = this.GetToken (en.Email);
+        IList<ClienteEN> listaEn = DameClientesPorEmail (p_Cliente_OID);
+
+        if (listaEn.Count > 0) {
+                ClienteEN en = listaEn [0];
+                if (en.Pass.Equals (Utils.Util.GetEncondeMD5 (p_pass)))
+                        result = this.GetToken (en.Email);
         }
 
         return result;

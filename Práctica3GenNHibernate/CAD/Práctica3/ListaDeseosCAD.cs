@@ -251,5 +251,66 @@ public System.Collections.Generic.IList<ListaDeseosEN> ReadAll (int first, int s
 
         return result;
 }
+
+public System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ListaDeseosEN> DameListaDeseosDeCliente (string p_oid_cliente)
+{
+        System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ListaDeseosEN> result;
+        try
+        {
+                SessionInitializeTransaction ();
+                //String sql = @"FROM ListaDeseosEN self where SELECT prod FROM ListaDeseosEN as li, ProductoEN as prod, ClienteEN as cli WHERE li.Cliente = :p_oid_cliente AND li.Id = prod.ListaDeseos";
+                //IQuery query = session.CreateQuery(sql);
+                IQuery query = (IQuery)session.GetNamedQuery ("ListaDeseosENdameListaDeseosDeClienteHQL");
+                query.SetParameter ("p_oid_cliente", p_oid_cliente);
+
+                result = query.List<Práctica3GenNHibernate.EN.Práctica3.ListaDeseosEN>();
+                SessionCommit ();
+        }
+
+        catch (Exception ex) {
+                SessionRollBack ();
+                if (ex is Práctica3GenNHibernate.Exceptions.ModelException)
+                        throw ex;
+                throw new Práctica3GenNHibernate.Exceptions.DataLayerException ("Error in ListaDeseosCAD.", ex);
+        }
+
+
+        finally
+        {
+                SessionClose ();
+        }
+
+        return result;
+}
+public void AgregarProducto (int p_listaDeseos_oid, int p_producto_oid)
+{
+        Práctica3GenNHibernate.EN.Práctica3.ListaDeseosEN listaDeseosEN = null;
+        try
+        {
+                SessionInitializeTransaction ();
+                listaDeseosEN = (ListaDeseosEN)session.Load (typeof(ListaDeseosEN), p_listaDeseos_oid);
+                listaDeseosEN.Producto = (System.Collections.Generic.IList<ProductoEN>)(Práctica3GenNHibernate.EN.Práctica3.ProductoEN)session.Load (typeof(Práctica3GenNHibernate.EN.Práctica3.ProductoEN), p_producto_oid);
+
+                listaDeseosEN.Producto.ListaDeseos.Add (listaDeseosEN);
+
+
+
+                session.Update (listaDeseosEN);
+                SessionCommit ();
+        }
+
+        catch (Exception ex) {
+                SessionRollBack ();
+                if (ex is Práctica3GenNHibernate.Exceptions.ModelException)
+                        throw ex;
+                throw new Práctica3GenNHibernate.Exceptions.DataLayerException ("Error in ListaDeseosCAD.", ex);
+        }
+
+
+        finally
+        {
+                SessionClose ();
+        }
+}
 }
 }

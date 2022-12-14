@@ -20,14 +20,19 @@ namespace Web_DSM.Models
         [ScaffoldColumn(false)]
         public IList<string> Comentarios { get; set; }
 
-        
+        [ScaffoldColumn(false)]
+        public IList<int> IdValoracionCliente { get; set; }
+
         [ScaffoldColumn(false)]
         public IList<double> ValoracionCliente { get; set; }
         
 
         [ScaffoldColumn(false)]
         public IList<string> NombreUsuario { get; set; }
-        
+
+        [ScaffoldColumn(false)]
+        public IList<string> EmailUsuario { get; set; }
+
 
         [Display(Prompt = "Nombre del producto", Description = "Nombre del producto", Name = "Nombre ")]
         [Required(ErrorMessage = "Debe indicar un nombre para el producto")]
