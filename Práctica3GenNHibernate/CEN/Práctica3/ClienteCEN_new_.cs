@@ -37,7 +37,7 @@ public string New_ (string p_email, string p_nombre, string p_apellidos, string 
 
         clienteEN.NombreUsuario = p_nombreUsuario;
 
-        clienteEN.Teléfono = p_teléfono;
+        clienteEN.Telefono = p_teléfono;
 
         clienteEN.Pass = Utils.Util.GetEncondeMD5 (p_pass);
 

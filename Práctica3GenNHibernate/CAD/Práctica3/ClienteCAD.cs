@@ -100,7 +100,7 @@ public void ModifyDefault (ClienteEN cliente)
                 clienteEN.NombreUsuario = cliente.NombreUsuario;
 
 
-                clienteEN.Teléfono = cliente.Teléfono;
+                clienteEN.Telefono = cliente.Telefono;
 
 
                 clienteEN.Pass = cliente.Pass;
@@ -175,7 +175,7 @@ public void Modify (ClienteEN cliente)
                 clienteEN.NombreUsuario = cliente.NombreUsuario;
 
 
-                clienteEN.Teléfono = cliente.Teléfono;
+                clienteEN.Telefono = cliente.Telefono;
 
 
                 clienteEN.Pass = cliente.Pass;

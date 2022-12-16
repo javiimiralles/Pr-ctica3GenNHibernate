@@ -190,7 +190,9 @@ namespace Web_DSM.Controllers
 
                     ClienteCEN clienteCEN = new ClienteCEN();
                     clienteCEN.New_(model.Email, model.Nombre, model.Apellidos, model.NombreUsuario, int.Parse(model.Telefono), model.Password, model.Genero);
-
+                    //PedidoCEN pedidoCEN = new PedidoCEN();
+                    //IList<LineaPedidoEN> linpedsEN = new List<LineaPedidoEN>();
+                    //pedidoCEN.New_("","","",0,)
                     Session["usuario"] = clienteCEN.ReadOID(model.Email); 
                     // Para obtener más información sobre cómo habilitar la confirmación de cuentas y el restablecimiento de contraseña, visite https://go.microsoft.com/fwlink/?LinkID=320771
                     // Enviar correo electrónico con este vínculo

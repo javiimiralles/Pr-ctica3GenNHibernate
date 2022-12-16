@@ -34,9 +34,9 @@ private string nombreUsuario;
 
 
 /**
- *	Atributo teléfono
+ *	Atributo telefono
  */
-private int teléfono;
+private int telefono;
 
 
 
@@ -109,8 +109,8 @@ public virtual string NombreUsuario {
 
 
 
-public virtual int Teléfono {
-        get { return teléfono; } set { teléfono = value;  }
+public virtual int Telefono {
+        get { return telefono; } set { telefono = value;  }
 }
 
 
@@ -162,20 +162,20 @@ public ClienteEN()
 
 
 
-public ClienteEN(string email, string nombre, string apellidos, string nombreUsuario, int teléfono, String pass, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.PedidoEN> pedido, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ValoracionClienteEN> valoracionCliente, int puntos, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ProductoEN> productoFavorito, string generoFav
+public ClienteEN(string email, string nombre, string apellidos, string nombreUsuario, int telefono, String pass, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.PedidoEN> pedido, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ValoracionClienteEN> valoracionCliente, int puntos, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ProductoEN> productoFavorito, string generoFav
                  )
 {
-        this.init (Email, nombre, apellidos, nombreUsuario, teléfono, pass, pedido, valoracionCliente, puntos, productoFavorito, generoFav);
+        this.init (Email, nombre, apellidos, nombreUsuario, telefono, pass, pedido, valoracionCliente, puntos, productoFavorito, generoFav);
 }
 
 
 public ClienteEN(ClienteEN cliente)
 {
-        this.init (Email, cliente.Nombre, cliente.Apellidos, cliente.NombreUsuario, cliente.Teléfono, cliente.Pass, cliente.Pedido, cliente.ValoracionCliente, cliente.Puntos, cliente.ProductoFavorito, cliente.GeneroFav);
+        this.init (Email, cliente.Nombre, cliente.Apellidos, cliente.NombreUsuario, cliente.Telefono, cliente.Pass, cliente.Pedido, cliente.ValoracionCliente, cliente.Puntos, cliente.ProductoFavorito, cliente.GeneroFav);
 }
 
 private void init (string email
-                   , string nombre, string apellidos, string nombreUsuario, int teléfono, String pass, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.PedidoEN> pedido, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ValoracionClienteEN> valoracionCliente, int puntos, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ProductoEN> productoFavorito, string generoFav)
+                   , string nombre, string apellidos, string nombreUsuario, int telefono, String pass, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.PedidoEN> pedido, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ValoracionClienteEN> valoracionCliente, int puntos, System.Collections.Generic.IList<Práctica3GenNHibernate.EN.Práctica3.ProductoEN> productoFavorito, string generoFav)
 {
         this.Email = email;
 
@@ -186,7 +186,7 @@ private void init (string email
 
         this.NombreUsuario = nombreUsuario;
 
-        this.Teléfono = teléfono;
+        this.Telefono = telefono;
 
         this.Pass = pass;
 

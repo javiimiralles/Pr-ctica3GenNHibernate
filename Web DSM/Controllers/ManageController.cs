@@ -6,6 +6,9 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using Práctica3GenNHibernate.CEN.Práctica3;
+using Práctica3GenNHibernate.EN.Práctica3;
+using Práctica3GenNHibernate.Utils;
 using Web_DSM.Models;
 
 namespace Web_DSM.Controllers
@@ -236,9 +239,20 @@ namespace Web_DSM.Controllers
                 var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
                 if (user != null)
                 {
+                    ClienteCEN cen = new ClienteCEN();
+                    string email = ((ClienteEN)Session["usuario"]).Email;
+                    string nombre = ((ClienteEN)Session["usuario"]).Nombre;
+                    string apellidos = ((ClienteEN)Session["usuario"]).Apellidos;
+                    string nombreUsuario = ((ClienteEN)Session["usuario"]).NombreUsuario;
+                    int telefono = ((ClienteEN)Session["usuario"]).Telefono;
+                    string password = Util.GetEncondeMD5(model.NewPassword);
+                    int puntos = ((ClienteEN)Session["usuario"]).Puntos;
+                    string generoFav = ((ClienteEN)Session["usuario"]).GeneroFav;
+
+                    cen.Modify(email, nombre, apellidos, nombreUsuario, telefono, password, puntos, generoFav);
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                 }
-                return RedirectToAction("Index", new { Message = ManageMessageId.ChangePasswordSuccess });
+                return RedirectToAction("Index", "Cliente", new { Message = ManageMessageId.ChangePasswordSuccess });
             }
             AddErrors(result);
             return View(model);

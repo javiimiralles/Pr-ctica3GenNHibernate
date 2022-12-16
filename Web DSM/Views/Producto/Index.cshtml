@@ -8,26 +8,26 @@
 }
 
 <div class="jumbotron">
-    <h1>MELODY RECORDS</h1>
+    <h1 class="melody-records">MELODY RECORDS</h1>
     <p class="lead">Encuentra tus discos, vinilos y demás artículos de tus artistas favoritos</p>
 </div>
 
 <div class="container-fluid">
     <div class="dropdown">
-        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
             Filtrar por Género
             <span class="caret"></span>
         </button>
         <div class="row" style="background-color:gray">
             <div class="col-sm-12" style="background-color: gray"></div>
         </div>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
             @{ List<string> generos = new List<string>(); }
             @foreach (var item in Model)
             {
                 if (!generos.Contains(item.Genero))
                 {
-                    <li>@Html.ActionLink(item.Genero, "PorGenero", "Producto", routeValues: new { genero = item.Genero }, htmlAttributes: null)</li>
+                    <li>@Html.ActionLink(item.Genero, "PorGenero", "Producto", routeValues: new { genero = item.Genero }, htmlAttributes: new { @class = "dropdown-item" })</li>
                 }
                 generos.Add(item.Genero);
             }
@@ -35,7 +35,7 @@
     </div>
 </div>
 
-<div class="container-fluid">
+<div class="container-fluid index-container">
     <div class="row">
         @foreach (var item in Model)
         {

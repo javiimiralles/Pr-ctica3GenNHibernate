@@ -18,8 +18,8 @@
 					<property name="NombreUsuario" type="string"> 
 						<column name="nombreUsuario"  not-null="true"/>
 					</property>
-					<property name="Teléfono" type="integer"> 
-						<column name="teléfono"  not-null="true"/>
+					<property name="Telefono" type="integer"> 
+						<column name="telefono"  not-null="true"/>
 					</property>
 					<property name="Pass" type="string"> 
 						<column name="pass"  not-null="true"/>

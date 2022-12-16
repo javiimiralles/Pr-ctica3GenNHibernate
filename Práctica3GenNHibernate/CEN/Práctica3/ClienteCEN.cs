@@ -39,7 +39,7 @@ public IClienteCAD get_IClienteCAD ()
         return this._IClienteCAD;
 }
 
-public void Modify (string p_Cliente_OID, string p_nombre, string p_apellidos, string p_nombreUsuario, int p_teléfono, String p_pass, int p_puntos, string p_generoFav)
+public void Modify (string p_Cliente_OID, string p_nombre, string p_apellidos, string p_nombreUsuario, int p_telefono, String p_pass, int p_puntos, string p_generoFav)
 {
         ClienteEN clienteEN = null;
 
@@ -49,8 +49,10 @@ public void Modify (string p_Cliente_OID, string p_nombre, string p_apellidos, s
         clienteEN.Nombre = p_nombre;
         clienteEN.Apellidos = p_apellidos;
         clienteEN.NombreUsuario = p_nombreUsuario;
-        clienteEN.Teléfono = p_teléfono;
-        clienteEN.Pass = Utils.Util.GetEncondeMD5 (p_pass);
+        clienteEN.Telefono = p_telefono;
+        /*PROTECTED REGION ID(usingPráctica3GenNHibernate.CEN.Práctica3_Cliente) ENABLED START*/
+        clienteEN.Pass = p_pass;
+        /*PROTECTED REGION END*/
         clienteEN.Puntos = p_puntos;
         clienteEN.GeneroFav = p_generoFav;
         //Call to ClienteCAD
