@@ -30,6 +30,8 @@ namespace Web_DSM.Models
         [Required]
         [Display(Name = "Género musical favorito")]
         public string Genero { get; set; }
+
+        public int Puntos { get; set; }
     }
 
 }

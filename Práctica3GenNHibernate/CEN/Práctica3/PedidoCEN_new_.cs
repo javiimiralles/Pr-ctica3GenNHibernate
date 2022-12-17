@@ -19,7 +19,7 @@ namespace Práctica3GenNHibernate.CEN.Práctica3
 {
 public partial class PedidoCEN
 {
-public int New_ (string p_direccion, string p_localidad, string p_provincia, int p_codigoPostal, string p_tipoTarjeta, string p_cliente)
+public int New_ (string p_direccion, string p_localidad, string p_provincia, int p_codigoPostal, string p_tipoTarjeta, string p_cliente, IList<LineaPedidoEN> p_linpeds)
 {
         /*PROTECTED REGION ID(Práctica3GenNHibernate.CEN.Práctica3_Pedido_new__customized) ENABLED START*/
 
@@ -41,11 +41,13 @@ public int New_ (string p_direccion, string p_localidad, string p_provincia, int
 
         pedidoEN.Estado = Enumerated.Práctica3.EstadoPedidoEnum.cesta;
 
-        pedidoEN.FechaPedido = new DateTime (1900, 1, 1);
+        pedidoEN.FechaPedido = DateTime.Now;
 
-        pedidoEN.FechaEntrega = new DateTime (1900, 1, 1);
+        pedidoEN.FechaEntrega = DateTime.Now;
 
         pedidoEN.PrecioTotal = 0;
+
+        pedidoEN.LineaPedido = p_linpeds;
 
         if (p_cliente != null) {
                 pedidoEN.Cliente = new Práctica3GenNHibernate.EN.Práctica3.ClienteEN ();

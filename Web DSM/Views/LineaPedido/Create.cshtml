@@ -1,0 +1,22 @@
+﻿@model Web_DSM.Models.LineaPedidoViewModel
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        <div class="form-group py-2">
+            <div class="input-field-number">
+                @Html.TextBoxFor(m => m.Cantidad, new { @class = "form-control", @type = "number", @value = "1", @min = "1", @max = Session["stock"], @step = "1" })
+            </div>
+            @Html.ValidationMessageFor(m => m.Cantidad, "", new { @class = "text-danger" })
+            <button class="btn btn-block text-center my-3" type="submit"><span class="bi bi-cart"></span> Añadir a la cesta</button>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

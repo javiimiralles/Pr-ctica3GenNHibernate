@@ -1,6 +1,7 @@
 ﻿using Práctica3GenNHibernate.CAD.Práctica3;
 using Práctica3GenNHibernate.CEN.Práctica3;
 using Práctica3GenNHibernate.Controllers;
+using Práctica3GenNHibernate.CP.Práctica3;
 using Práctica3GenNHibernate.EN.Práctica3;
 using System;
 using System.Collections.Generic;

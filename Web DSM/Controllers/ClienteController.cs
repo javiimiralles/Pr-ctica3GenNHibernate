@@ -60,6 +60,16 @@ namespace Web_DSM.Controllers
             SessionInitialize();
             ClienteEN cliEN = new ClienteCAD(session).ReadOIDDefault(email);
             cli = new ClienteAssembler().ConvertENToModelUI(cliEN);
+
+            IList<GeneroEN> listaGeneros = new GeneroCEN().ReadAll(0, -1);
+            IList<SelectListItem> generosItems = new List<SelectListItem>();
+            foreach (GeneroEN genero in listaGeneros)
+            {
+                generosItems.Add(new SelectListItem { Text = genero.Nombre, Value = genero.Nombre.ToString() });
+            }
+
+            ViewData["Genero"] = generosItems;
+
             SessionClose();
 
             return View(cli);

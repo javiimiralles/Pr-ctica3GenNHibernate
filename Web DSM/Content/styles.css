@@ -1,4 +1,6 @@
-﻿* {
+﻿@import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Poppins&display=swap');
+
+* {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -10,6 +12,30 @@
     --rosa_claro: #DDCAD9;
     --azul_platino: #E5E9EC;
     --azul_claro: #EAFDF8;
+}
+
+/*Inputs*/
+.input-field, .input-field-number {
+    border-radius: 5px;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    border: 1px solid var(--rosa_oscuro);
+    color: var(--rosa_oscuro)
+}
+
+input.form-control, input.form-control:focus {
+    border: none;
+    outline: none;
+    box-shadow: none;
+    width: 100%;
+    padding: 0px 2px;
+    font-family: 'Poppins', sans-serif
+}
+
+.input-field-number {
+    width: 50px;
 }
 
 /*_Layout*/
@@ -59,18 +85,13 @@ div.navbar-right > div > a:hover {
     margin-bottom: 5em;
 }
 
-.product-name {
-    font-weight: bold;
-    font-size: 1.5em;
-    margin-top: 0.7em 0 0 0;
+p.genero {
+    background-color: var(--rosa_oscuro);
 }
 
-.product-type {
-    display: inline-block;
-    padding: .5em;
-    border: 1px solid black;
-    border-radius: .5em;
-    background-color: lightgray;
+p.recomendado {
+    background-color: var(--rosa_claro);
+    color: black;
 }
 
 /*Details*/
@@ -108,8 +129,7 @@ div.navbar-right > div > a:hover {
     color: gray;
 }
 
-/*Login*/
-@import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Poppins&display=swap');
+/*Login y Register*/
 body {
     background-color: #eee;
     height: 100vh;
@@ -134,25 +154,6 @@ body {
 }
 
 .h4 {
-    font-family: 'Poppins', sans-serif
-}
-
-.input-field {
-    border-radius: 5px;
-    padding: 5px;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    border: 1px solid var(--rosa_oscuro);
-    color: var(--rosa_oscuro)
-}
-
-input.form-control, input.form-control:focus {
-    border: none;
-    outline: none;
-    box-shadow: none;
-    width: 100%;
-    padding: 0px 2px;
     font-family: 'Poppins', sans-serif
 }
 
@@ -191,6 +192,12 @@ div > a:hover {
     #forgot {
         font-size: 0.95rem
     }
+}
+
+/*Mi Perfil*/
+p.puntos {
+    background-color: var(--rosa);
+    color: black;
 }
 
 

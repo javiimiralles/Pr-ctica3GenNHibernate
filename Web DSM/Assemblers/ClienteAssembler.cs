@@ -18,6 +18,7 @@ namespace Web_DSM.Assemblers
             cliente.NombreUsuario = en.NombreUsuario;
             cliente.Telefono = en.Telefono.ToString();
             cliente.Genero = en.GeneroFav;
+            cliente.Puntos = en.Puntos;
 
             return cliente;
         }
