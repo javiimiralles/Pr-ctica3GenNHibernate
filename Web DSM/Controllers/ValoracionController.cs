@@ -88,7 +88,6 @@ namespace Web_DSM.Controllers
         {
             try
             {
-                // TODO: Add delete logic here
                 SessionInitialize();
                 ValoracionClienteCAD valCAD = new ValoracionClienteCAD(session);
                 ValoracionClienteCEN valCEN = new ValoracionClienteCEN(valCAD);

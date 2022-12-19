@@ -3,11 +3,13 @@ using Práctica3GenNHibernate.CEN.Práctica3;
 using Práctica3GenNHibernate.Controllers;
 using Práctica3GenNHibernate.CP.Práctica3;
 using Práctica3GenNHibernate.EN.Práctica3;
+using Práctica3GenNHibernate.Enumerated.Práctica3;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Web_DSM.Assemblers;
 using Web_DSM.Models;
 
 namespace Web_DSM.Controllers
@@ -17,7 +19,26 @@ namespace Web_DSM.Controllers
         // GET: LineaPedido
         public ActionResult Index()
         {
-            return View();
+            SessionInitialize();
+            PedidoCAD pedCAD = new PedidoCAD(session);
+            PedidoCEN pedCEN = new PedidoCEN(pedCAD);
+
+            LineaPedidoCAD linpedCAD = new LineaPedidoCAD(session);
+            LineaPedidoCEN linpedCEN = new LineaPedidoCEN(linpedCAD);
+            IList<LineaPedidoEN> listaLinpeds = linpedCEN.ReadAll(0, -1);
+            IList<LineaPedidoEN> cestaCliente = new List<LineaPedidoEN>();
+            foreach(LineaPedidoEN linped in listaLinpeds)
+            {
+                PedidoEN pedEN = pedCEN.ReadOID(linped.Pedido.Id);
+                string emailPedido = pedEN.Cliente.Email;
+                string emailCliente = ((ClienteEN)Session["usuario"]).Email;
+                if (linped.Pedido.Estado == EstadoPedidoEnum.cesta && emailCliente == emailPedido)
+                    cestaCliente.Add(linped);
+            }
+            IEnumerable<LineaPedidoViewModel> listViewModel = new LineaPedidoAssembler().ConvertListENToModel(cestaCliente).ToList();
+            SessionClose();
+
+            return View(listViewModel);
         }
 
         // GET: LineaPedido/Details/5
@@ -41,11 +62,26 @@ namespace Web_DSM.Controllers
             {
                 SessionInitialize();
                 LineaPedidoCP cp = new LineaPedidoCP();
-                int idPedido = ((PedidoEN)Session["pedido"]).Id;
-                cp.New_((int)Session["idProducto"], idPedido, linped.Cantidad);
+
+                string email = ((ClienteEN)Session["usuario"]).Email;
+                ClienteCAD cliCAD = new ClienteCAD(session);
+                ClienteEN cliEN = cliCAD.ReadOID(email);
+                IList<PedidoEN> listaPed = cliEN.Pedido;
+                int idPedido = 0;
+                foreach (PedidoEN pedido in listaPed)
+                {
+                    if(pedido.Estado == EstadoPedidoEnum.cesta)
+                    {
+                        idPedido = pedido.Id;
+                    }
+                }
+
+                int idProducto = (int)Session["idProducto"];
+
+                cp.New_(idProducto, idPedido, linped.Cantidad);
                 SessionClose();
 
-                return RedirectToAction("Details", "Producto", new { id = (int)Session["idProducto"] });
+                return View("_AnyadidoACesta");
             }
             catch
             {
@@ -78,7 +114,13 @@ namespace Web_DSM.Controllers
         // GET: LineaPedido/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            SessionInitialize();
+            LineaPedidoCAD linpedCAD = new LineaPedidoCAD(session);
+            LineaPedidoCEN linpedCEN = new LineaPedidoCEN(linpedCAD);
+            SessionClose();
+            new LineaPedidoCEN().Destroy(id);
+
+            return RedirectToAction("Index", "LineaPedido");
         }
 
         // POST: LineaPedido/Delete/5

@@ -34,6 +34,7 @@
                 @if (Session["usuario"] != null)
                 {
                     @Html.ActionLink("Favoritos", "ListaFavoritos", "Producto")
+                    @Html.ActionLink("Cesta", "Index", "LineaPedido")
                 }
                 @Html.ActionLink("Acerca de", "About", "Home")
                 @Html.ActionLink("Contacto", "Contact", "Home")

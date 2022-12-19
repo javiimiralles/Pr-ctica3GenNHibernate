@@ -16,6 +16,12 @@ namespace Web_DSM.Assemblers
             linped.IdProducto = en.Producto.Id;
             linped.IdPedido = en.Pedido.Id;
             linped.Cantidad = en.Cantidad;
+            linped.NombreProducto = en.Producto.Nombre;
+            linped.Imagen = en.Producto.Imagen;
+            linped.PrecioUnitario = en.Producto.Precio;
+            linped.Valoracion = en.Producto.ValoracionMedia;
+            linped.Genero = en.Producto.Genero.Nombre;
+            linped.ImporteTotal = en.Pedido.PrecioTotal;
 
             return linped;
         }

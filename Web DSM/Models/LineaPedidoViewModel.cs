@@ -21,5 +21,17 @@ namespace Web_DSM.Models
         [Required]
         [Display(Name = "Cantidad")]
         public int Cantidad { get; set; }
+
+        public string NombreProducto { get; set; }
+
+        public string Imagen { get; set; }
+
+        public double PrecioUnitario { get; set; }
+
+        public double Valoracion { get; set; }
+
+        public string Genero { get; set; }
+
+        public double ImporteTotal { get; set; }
     }
 }

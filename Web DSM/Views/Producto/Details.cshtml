@@ -8,98 +8,99 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<hr />
-<p>@Html.ActionLink("Volver atrás", "Index")</p>
-<div class="details-container">
-    <div>
-        <img src="@Html.DisplayFor(model => model.Imagen)" width="600" height="600" />
-    </div>
-    <div>
-        <h3>@Html.DisplayFor(model => model.Nombre)</h3>
-        <p><strong>@Html.DisplayNameFor(model => model.Descripcion):</strong> @Html.DisplayFor(model => model.Descripcion)</p>
-        <p class="product-type">@Html.DisplayFor(model => model.Genero)</p>
-        <p>@Html.DisplayFor(model => model.Precio)</p>
-        <p>
-            <strong>Valoración: </strong>
-            @if (Model.ValoracionMedia != 0)
-            {
-                for (var i = 0; i < Model.ValoracionMedia; i++)
+<a href="@Url.Action("Index", "Producto")" class="bi bi-arrow-left-circle-fill fs-3"></a>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-6 col-xxl-6 d-inline-block">
+            <img src="@Html.DisplayFor(model => model.Imagen)" width="500" height="500" />
+        </div>
+        <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6 d-inline-block">
+            <h3 class="d-inline-block">@Html.DisplayFor(model => model.Nombre)</h3>
+            <p class="badge text-wrap fs-7 d-inline-block m-2 genero">@Html.DisplayFor(model => model.Genero)
+            <p><strong>@Html.DisplayNameFor(model => model.Descripcion):</strong> @Html.DisplayFor(model => model.Descripcion)</p>
+            <p>@Html.DisplayFor(model => model.Precio)</p>
+            <p>
+                <strong>Valoración: </strong>
+                @if (Model.ValoracionMedia != 0)
+                {
+                    for (var i = 0; i < Model.ValoracionMedia; i++)
+                    {
+                        <span>&#9733;</span>
+                    }
+                    for (var i = 0; i < (5 - Model.ValoracionMedia); i++)
+                    {
+                        <span>&#9734;</span>
+                    }
+                }
+                else
                 {
                     <span>&#9733;</span>
-                }
-                for (var i = 0; i < (5 - Model.ValoracionMedia); i++)
-                {
+                    <span>&#9734;</span>
+                    <span>&#9734;</span>
+                    <span>&#9734;</span>
                     <span>&#9734;</span>
                 }
-            }
-            else
+            </p>
+            @if (Session["usuario"] != null)
             {
-                <span>&#9733;</span>
-                <span>&#9734;</span>
-                <span>&#9734;</span>
-                <span>&#9734;</span>
-                <span>&#9734;</span>
-            }
-        </p>
-        @if (Model.Stock != 0)
-        {
-            <p>Quedan @Html.DisplayFor(modelItem => Model.Stock) unidades</p>
-            if (Session["usuario"] != null)
-            {
-                Session["stock"] = Model.Stock;
-                Session["idProducto"] = Model.Id;
-                //{ Html.Partial("Create", "LineaPedido"); }
-            } else
-            {
-                <p>Para poder comprar el producto, @Html.ActionLink("inicia sesión", "Login", "Account")</p>
-            }
-        }
-        else
-        {
-            <p> Sin Stock </p>
-        }
-        @if (Session["usuario"] != null)
-        {
-            if (((ClienteEN)Session["usuario"]).GeneroFav == Model.Genero)
-            {
-                <p>Recomendado para tí</p>
-            }
-
-            bool encontrado = false;
-            ProductoCEN prodCEN = new ProductoCEN();
-            IList<ProductoEN> listProdEn = prodCEN.DameListaFavoritosCliente(((ClienteEN)Session["usuario"]).Email);
-            foreach (ProductoEN prod in listProdEn)
-            {
-                if (prod.Id == Model.Id)
+                if (((ClienteEN)Session["usuario"]).GeneroFav == Model.Genero)
                 {
-                    encontrado = true;
+                    <p class="badge text-wrap fs-7 recomendado me-3">Recomendado para tí</p>
+                }
+
+                bool encontrado = false;
+                ProductoCEN prodCEN = new ProductoCEN();
+                IList<ProductoEN> listProdEn = prodCEN.DameListaFavoritosCliente(((ClienteEN)Session["usuario"]).Email);
+                foreach (ProductoEN prod in listProdEn)
+                {
+                    if (prod.Id == Model.Id)
+                    {
+                        encontrado = true;
+                    }
+                }
+                if (encontrado)
+                {
+                    <a href="@Url.Action("QuitarDeFavoritos", "Producto", routeValues: new { idProducto = Model.Id })">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
+                        </svg>
+                    </a>
+                }
+                else
+                {
+                    <a href="@Url.Action("AnyadirAFavoritos", "Producto", routeValues: new { idProducto = Model.Id })">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
+                            <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
+                        </svg>
+                    </a>
+                }
+
+            }
+            @if (Model.Stock != 0)
+            {
+                <p>Quedan @Html.DisplayFor(modelItem => Model.Stock) unidades</p>
+                if (Session["usuario"] != null)
+                {
+                    Session["stock"] = Model.Stock;
+                    Session["idProducto"] = Model.Id;
+                    { Html.RenderAction("Create", "LineaPedido"); }
+                }
+                else
+                {
+                    <p>Para poder comprar el producto, @Html.ActionLink("inicia sesión", "Login", "Account")</p>
                 }
             }
-            if (encontrado)
-            {
-                <a href="@Url.Action("QuitarDeFavoritos", "Producto", routeValues: new { idProducto = Model.Id })">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
-                    </svg>
-                </a>
-            }
             else
             {
-                <a href="@Url.Action("AnyadirAFavoritos", "Producto", routeValues: new { idProducto = Model.Id })">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
-                        <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
-                    </svg>
-                </a>
+                <p class="text-danger fw-bold"> Sin Stock </p>
             }
-
-        }
+        </div>
     </div>
 </div>
-
+<hr />
 <h3><stong>Comentarios</stong></h3>
-<div class="row" style="background-color:gray">
-    <div class="col-sm-12" style="background-color: gray"></div>
-</div>
+<hr />
 <div class="comments-container">
     <!--Hacemos que si hay un usuario con sesíon iniciada se muestre en primer lugar su comentario si es que tiene uno-->
     @{
@@ -115,29 +116,28 @@
             if (Model.EmailUsuario[cont] == emailCliente)
             {
                 <div>
-                    <h4><strong>@Html.DisplayFor(model => model.NombreUsuario[cont])</strong> (Tú)</h4>
-                    <a href="@Url.Action("Edit", "Valoracion", routeValues: new { idValoracion = Model.IdValoracionCliente[cont], idProducto = Model.Id })">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
-                            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
-                            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
-                        </svg>
-                    </a>
-                    <a href="@Url.Action("Delete", "Valoracion", routeValues: new { idValoracion = Model.IdValoracionCliente[cont], idProducto = Model.Id })">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
-                            <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" />
-                        </svg>
-                    </a>
-                    <p class="valoracion">
+                    <h5 class="d-inline-block"><strong>@Html.DisplayFor(model => model.NombreUsuario[cont])</strong> (Tú)</h5>
+                    <a class="btn btn-block text-center my-3 bi bi-pencil-square" href="@Url.Action("Edit", "Valoracion", routeValues: new { idValoracion = Model.IdValoracionCliente[cont], idProducto = Model.Id })"></a>
+                    <a class="btn btn-block text-center my-3 bi bi-trash3-fill" href="@Url.Action("Delete", "Valoracion", routeValues: new { idValoracion = Model.IdValoracionCliente[cont], idProducto = Model.Id })"></a>
+                    <p class="ms-1">
                         @if (Model.ValoracionCliente[cont] > 0)
                         {
                             for (var i = 0; i < Model.ValoracionCliente[cont]; i++)
                             {
                                 <span>&#9733;</span>
                             }
+                            for (var i = 0; i < (5 - Model.ValoracionCliente[cont]); i++)
+                            {
+                                <span>&#9734;</span>
+                            }
                         }
                         else
                         {
                             <span>&#9733;</span>
+                            <span>&#9734;</span>
+                            <span>&#9734;</span>
+                            <span>&#9734;</span>
+                            <span>&#9734;</span>
                         }
                     </p>
                     <p>@Html.DisplayFor(model => model.Comentarios[cont])</p>
@@ -176,11 +176,11 @@
     {
         <p>Aún no hay comentarios</p>
     }
-    @if (Session["usuario"] != null && !ya_ha_comentado)
-    {
-        @Html.ActionLink("Añadir comentario", "Create", "Valoracion", routeValues: new { idProducto = Model.Id }, htmlAttributes: null)
-    }
 </div>
+@if (Session["usuario"] != null && !ya_ha_comentado)
+{
+    @Html.ActionLink("Añadir comentario", "Create", "Valoracion", routeValues: new { idProducto = Model.Id }, htmlAttributes: new { @class = "btn btn-block text-center my-3" })
+}
 
 
 

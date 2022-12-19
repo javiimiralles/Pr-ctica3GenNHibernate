@@ -330,6 +330,10 @@
     <Content Include="Views\Cliente\Index.cshtml" />
     <Content Include="Views\Cliente\Edit.cshtml" />
     <Content Include="Views\LineaPedido\Create.cshtml" />
+    <Content Include="Views\Shared\_AnyadidoACesta.cshtml" />
+    <Content Include="Views\LineaPedido\Index.cshtml" />
+    <Content Include="Views\Pedido\Edit.cshtml" />
+    <Content Include="Views\Pedido\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

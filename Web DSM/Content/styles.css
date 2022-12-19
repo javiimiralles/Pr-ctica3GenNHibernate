@@ -1,4 +1,5 @@
 ﻿@import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap');
 
 * {
     box-sizing: border-box;
@@ -10,8 +11,10 @@
     --rosa_oscuro: #7c616c;
     --rosa: #D1B1CB;
     --rosa_claro: #DDCAD9;
-    --azul_platino: #E5E9EC;
-    --azul_claro: #EAFDF8;
+}
+
+.h2 {
+    font-family: 'IBM Plex Sans', sans-serif;
 }
 
 /*Inputs*/
@@ -35,7 +38,7 @@ input.form-control, input.form-control:focus {
 }
 
 .input-field-number {
-    width: 50px;
+    width: 70px;
 }
 
 /*_Layout*/
@@ -105,12 +108,6 @@ p.recomendado {
     margin-left: 5em;
 }
 
-.comments-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    margin: 3em;
-}
-
 .comments-container > div {
     padding: 0 1.3em;
 }
@@ -129,11 +126,16 @@ p.recomendado {
     color: gray;
 }
 
+textarea.form-control {
+    resize: none;
+    border: none;
+}
+
 /*Login y Register*/
 body {
     background-color: #eee;
     height: 100vh;
-    font-family: 'Poppins', sans-serif;
+    /*font-family: 'Poppins', sans-serif;*/
     background: linear-gradient(to top, #fff 10%, var(--rosa_claro) 90%) no-repeat
 }
 
