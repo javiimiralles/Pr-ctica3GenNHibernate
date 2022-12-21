@@ -22,7 +22,7 @@
             idPedido = item.IdPedido;
             <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-4 col-xxl-4">
                 <div class="card">
-                    <a href="@Url.Action("Details", "Producto", new { id = item.Id })">
+                    <a href="@Url.Action("Details", "Producto", new { id = item.IdProducto })">
                         <img src="@Html.DisplayFor(modelItem => item.Imagen)" class="card-img-top" height="350" width="350" />
                         <div class="card-img-overlay"><p class="badge text-wrap fs-7 d-inline-block m-2 genero">@Html.DisplayFor(modelItem => item.Genero)</p></div>
                     </a>
@@ -55,7 +55,7 @@
                         <p><strong>Cantidad: </strong>@Html.DisplayFor(modelItem => item.Cantidad)</p>
                     </div>
                 </div>
-                <a href="@Url.Action("Delete", "LineaPedido", routeValues: new { id = item.IdProducto })" class="bi bi-trash3-fill btn btn-block text-center my-3">Eliminar</a>
+                <a href="@Url.Action("Delete", "LineaPedido", routeValues: new { id = item.Id })" class="bi bi-trash3-fill btn btn-block text-center my-3">Eliminar</a>
             </div>
         }
     </div>
