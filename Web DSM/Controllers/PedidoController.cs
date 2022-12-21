@@ -19,7 +19,22 @@ namespace Web_DSM.Controllers
         // GET: Pedido
         public ActionResult Index()
         {
-            return View();
+            PedidoCAD pedCAD = new PedidoCAD();
+            PedidoCEN pedCEN = new PedidoCEN(pedCAD);
+            IList<PedidoEN> listaPeds = pedCEN.ReadAll(0, -1);
+            IList<PedidoEN> pedsCliente = new List<PedidoEN>();
+            foreach (PedidoEN ped in listaPeds)
+            {
+                PedidoEN pedEN = pedCEN.ReadOID(ped.Id);
+                string emailPedido = pedEN.Cliente.Email;
+                string emailCliente = ((ClienteEN)Session["usuario"]).Email;
+                if ((ped.Estado == EstadoPedidoEnum.reparto || ped.Estado == EstadoPedidoEnum.entregado) && emailCliente == emailPedido)
+                    pedsCliente.Add(ped);
+            }
+            IEnumerable<PedidoViewModel> listViewModel = new PedidoAssembler().ConvertListENToModel(pedsCliente).ToList();
+            SessionClose();
+
+            return View(listViewModel);
         }
 
         // GET: Pedido/Details/5
@@ -71,60 +86,17 @@ namespace Web_DSM.Controllers
             try
             {
                 SessionInitialize();
+
                 string email = ((ClienteEN)Session["usuario"]).Email;
                 int idPedido = (int)Session["idPedido"];
                 double imptotal = (double)Session["importeTotal"];
 
                 PedidoCP pedidoCP = new PedidoCP();
-                pedidoCP.RealizarPago(idPedido, email, pedido.Num_Tarjeta);
-
-                PedidoCAD pedidoCAD = new PedidoCAD(session);
-                PedidoCEN pedidoCEN = new PedidoCEN(pedidoCAD);
-                PedidoEN pedidoEN = pedidoCEN.ReadOID(idPedido);
-
-                /*
-                LineaPedidoCAD linpedCAD = new LineaPedidoCAD(session);
-                LineaPedidoCEN linpedCEN = new LineaPedidoCEN(linpedCAD);
-                IList<LineaPedidoEN> listaLinpeds = linpedCEN.ReadAll(0, -1);
-                foreach (LineaPedidoEN linped in listaLinpeds)
-                {
-                    PedidoEN pedEN = pedidoCEN.ReadOID(linped.Pedido.Id);
-                    string emailPedido = pedEN.Cliente.Email;
-                    if (linped.Pedido.Estado == EstadoPedidoEnum.cesta && email == emailPedido) {
-                        ProductoCAD prodCAD = new ProductoCAD(session);
-                        ProductoCEN prodCEN = new ProductoCEN(prodCAD);
-                        ProductoEN prodEN = prodCEN.ReadOID(linped.Producto.Id);
-                        prodEN.Stock -= linped.Cantidad;
-                        prodCAD.ModifyDefault(prodEN);
-                    }
-                }
-                */
-                pedidoEN.FechaPedido = DateTime.Now;
-                pedidoEN.FechaEntrega = DateTime.Now.AddDays(7);
-                pedidoEN.Direccion = pedido.Direccion;
-                pedidoEN.Localidad = pedido.Localidad;
-                pedidoEN.Provincia = pedido.Provincia;
-                pedidoEN.CodigoPostal = pedido.Codigo_Postal;
-                pedidoEN.TipoTarjeta = pedido.Num_Tarjeta;
-                pedidoEN.Estado = EstadoPedidoEnum.reparto;
-                pedidoEN.PrecioTotal = imptotal;
-                pedidoCAD.ModifyDefault(pedidoEN);
-
-                // Le sumamos puntos al cliente segun lo que se ha gastado
-                ClienteCAD clienteCAD = new ClienteCAD(session);
-                ClienteCEN clienteCEN = new ClienteCEN(clienteCAD);
-                ClienteEN clienteEN = clienteCEN.ReadOID(email);
-                clienteEN.Puntos = clienteEN.Puntos + (int)imptotal / 2;
-                clienteCAD.ModifyDefault(clienteEN);
-
-                //Reinicializamos la cesta
-                PedidoCEN pedidoCEN2 = new PedidoCEN();
-                IList<LineaPedidoEN> linpeds = new List<LineaPedidoEN>();
-                pedidoCEN2.New_("", "", "", 0, "", email, linpeds);
+                pedidoCP.RealizarPago(idPedido, email, pedido.Direccion, pedido.Localidad, pedido.Provincia, pedido.Codigo_Postal, pedido.Num_Tarjeta, imptotal);
 
                 SessionClose();
-
-                return RedirectToAction("Index");
+                
+                return View("ConfirmacionCompra");
             }
             catch
             {

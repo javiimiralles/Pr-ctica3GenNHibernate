@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Perfil de @Html.DisplayFor(model => model.NombreUsuario)</h2>
+<h2 class="h2">Perfil de @Html.DisplayFor(model => model.NombreUsuario)</h2>
 <hr />
 <h4>Tus datos</h4>
 <div class="container">
@@ -51,6 +51,7 @@
     </div>
 </div>
 <p class="badge text-wrap fs-6 puntos mt-2">Puntos: @Html.DisplayFor(model => model.Puntos)</p>
+<p>* Los puntos aumentan las posibilidades de que te toque alguno de los sorteos de cheques regalo o productos de la web que realizamos cada mes en nuestras redes sociales.</p>
 <hr />
 
 <div>

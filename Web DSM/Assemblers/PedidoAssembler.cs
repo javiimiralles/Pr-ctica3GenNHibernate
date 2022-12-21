@@ -1,4 +1,7 @@
-﻿using Práctica3GenNHibernate.EN.Práctica3;
+﻿using Práctica3GenNHibernate.CAD.Práctica3;
+using Práctica3GenNHibernate.CEN.Práctica3;
+using Práctica3GenNHibernate.EN.Práctica3;
+using Práctica3GenNHibernate.Enumerated.Práctica3;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +27,21 @@ namespace Web_DSM.Assemblers
             pedido.Estado = en.Estado;
             pedido.LinPeds = en.LineaPedido;
             pedido.Precio_Total = en.PrecioTotal;
+            //-----
+            pedido.Cantidad = new List<int>();
+            pedido.NombreProducto = new List<string>();
+            pedido.Imagen = new List<string>();
+            pedido.PrecioUnitario = new List<double>();
+
+            /*
+            foreach (var linped in en.LineaPedido)
+            {
+                pedido.Cantidad.Add(linped.Cantidad);
+                pedido.NombreProducto.Add(linped.Producto.Nombre);
+                pedido.Imagen.Add(linped.Producto.Imagen);
+                pedido.PrecioUnitario.Add(linped.Producto.Precio);
+            }
+            */
 
             return pedido;
         }

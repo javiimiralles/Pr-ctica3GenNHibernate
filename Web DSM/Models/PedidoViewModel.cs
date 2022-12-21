@@ -42,13 +42,18 @@ namespace Web_DSM.Models
         [DataType(DataType.CreditCard)]
         public string Num_Tarjeta { get; set; }
 
-        [ScaffoldColumn(false)]
         public EstadoPedidoEnum Estado { get; set; }
 
-        [ScaffoldColumn(false)]
         public IList<LineaPedidoEN> LinPeds { get; set; }
 
-        [ScaffoldColumn(false)]
         public double Precio_Total { get; set; }
+
+        public IList<int> Cantidad { get; set; }
+
+        public IList<string> NombreProducto { get; set; }
+
+        public IList<string> Imagen { get; set; }
+
+        public IList<double> PrecioUnitario { get; set; }
     }
 }

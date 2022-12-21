@@ -1,4 +1,5 @@
 ﻿using Práctica3GenNHibernate.EN.Práctica3;
+using Práctica3GenNHibernate.Enumerated.Práctica3;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -33,5 +34,13 @@ namespace Web_DSM.Models
         public string Genero { get; set; }
 
         public double ImporteTotal { get; set; }
+
+        public EstadoPedidoEnum Estado { get; set; }
+
+        public string Direccion { get; set; }
+
+        public DateTime FechaPedido { get; set; }
+
+        public DateTime FechaEntrega { get; set; }
     }
 }

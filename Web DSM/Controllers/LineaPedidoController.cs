@@ -41,6 +41,30 @@ namespace Web_DSM.Controllers
             return View(listViewModel);
         }
 
+        public ActionResult MisPedidos()
+        {
+            SessionInitialize();
+            PedidoCAD pedCAD = new PedidoCAD(session);
+            PedidoCEN pedCEN = new PedidoCEN(pedCAD);
+
+            LineaPedidoCAD linpedCAD = new LineaPedidoCAD(session);
+            LineaPedidoCEN linpedCEN = new LineaPedidoCEN(linpedCAD);
+            IList<LineaPedidoEN> listaLinpeds = linpedCEN.ReadAll(0, -1);
+            IList<LineaPedidoEN> pedsCliente = new List<LineaPedidoEN>();
+            foreach (LineaPedidoEN linped in listaLinpeds)
+            {
+                PedidoEN pedEN = pedCEN.ReadOID(linped.Pedido.Id);
+                string emailPedido = pedEN.Cliente.Email;
+                string emailCliente = ((ClienteEN)Session["usuario"]).Email;
+                if ((linped.Pedido.Estado == EstadoPedidoEnum.reparto || linped.Pedido.Estado == EstadoPedidoEnum.entregado) && emailCliente == emailPedido)
+                    pedsCliente.Add(linped);
+            }
+            IEnumerable<LineaPedidoViewModel> listViewModel = new LineaPedidoAssembler().ConvertListENToModel(pedsCliente).ToList();
+            SessionClose();
+
+            return View(listViewModel);
+        }
+
         // GET: LineaPedido/Details/5
         public ActionResult Details(int id)
         {

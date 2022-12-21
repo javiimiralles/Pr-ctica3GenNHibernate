@@ -20,6 +20,7 @@
                 <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
             </svg>
         </button>
+        @Html.ActionLink("Melody Records", "Index", "Producto", routeValues: null, htmlAttributes: new { @class = "melody-records text-white fs-3 me-auto" })
         @Html.Partial("_LoginPartial")
     </nav>
     <!-- Contenido de off canvas  -->
@@ -35,8 +36,9 @@
                 {
                     @Html.ActionLink("Favoritos", "ListaFavoritos", "Producto")
                     @Html.ActionLink("Cesta", "Index", "LineaPedido")
+                    @Html.ActionLink("Mis pedidos", "MisPedidos", "LineaPedido")
                 }
-                @Html.ActionLink("Acerca de", "About", "Home")
+                @Html.ActionLink("Sobre nosotros", "About", "Home")
                 @Html.ActionLink("Contacto", "Contact", "Home")
             </div>
         </div>

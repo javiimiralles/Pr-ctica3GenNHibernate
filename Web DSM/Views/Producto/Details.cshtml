@@ -61,19 +61,11 @@
                 }
                 if (encontrado)
                 {
-                    <a href="@Url.Action("QuitarDeFavoritos", "Producto", routeValues: new { idProducto = Model.Id })">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
-                        </svg>
-                    </a>
+                    <a class="bi bi bi-heart btn btn-block text-center my-3"  href="@Url.Action("QuitarDeFavoritos", "Producto", routeValues: new { idProducto = Model.Id })"></a>
                 }
                 else
                 {
-                    <a href="@Url.Action("AnyadirAFavoritos", "Producto", routeValues: new { idProducto = Model.Id })">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
-                            <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
-                        </svg>
-                    </a>
+                    <a class="bi bi bi-heart-fill btn btn-block text-center my-3" href="@Url.Action("AnyadirAFavoritos", "Producto", routeValues: new { idProducto = Model.Id })"></a>
                 }
 
             }
@@ -88,7 +80,7 @@
                 }
                 else
                 {
-                    <p>Para poder comprar el producto, @Html.ActionLink("inicia sesión", "Login", "Account")</p>
+                    <div>Para poder comprar el producto, @Html.ActionLink("inicia sesión", "Login", "Account")</div>
                 }
             }
             else
@@ -100,8 +92,8 @@
 </div>
 <hr />
 <h3><stong>Comentarios</stong></h3>
-<hr />
-<div class="comments-container">
+<div class="container-fluid">
+    <div class="row">
     <!--Hacemos que si hay un usuario con sesíon iniciada se muestre en primer lugar su comentario si es que tiene uno-->
     @{
         int cont = 0;
@@ -115,11 +107,13 @@
         {
             if (Model.EmailUsuario[cont] == emailCliente)
             {
-                <div>
-                    <h5 class="d-inline-block"><strong>@Html.DisplayFor(model => model.NombreUsuario[cont])</strong> (Tú)</h5>
-                    <a class="btn btn-block text-center my-3 bi bi-pencil-square" href="@Url.Action("Edit", "Valoracion", routeValues: new { idValoracion = Model.IdValoracionCliente[cont], idProducto = Model.Id })"></a>
-                    <a class="btn btn-block text-center my-3 bi bi-trash3-fill" href="@Url.Action("Delete", "Valoracion", routeValues: new { idValoracion = Model.IdValoracionCliente[cont], idProducto = Model.Id })"></a>
-                    <p class="ms-1">
+                <div class="col-12 col-sm-12 col-md-6 col-lg-6 card">
+                    <div>
+                        <h5 class="d-inline-block card-title"><strong>@Html.DisplayFor(model => model.NombreUsuario[cont])</strong> (Tú)</h5>
+                        <a class="btn btn-sm text-center bi bi-pencil-square d-inline-block" href="@Url.Action("Edit", "Valoracion", routeValues: new { idValoracion = Model.IdValoracionCliente[cont], idProducto = Model.Id })"></a>
+                        <a class="btn btn-sm text-center bi bi-trash3-fill d-inline-block" href="@Url.Action("Delete", "Valoracion", routeValues: new { idValoracion = Model.IdValoracionCliente[cont], idProducto = Model.Id })"></a>
+                    </div>
+                    <p>
                         @if (Model.ValoracionCliente[cont] > 0)
                         {
                             for (var i = 0; i < Model.ValoracionCliente[cont]; i++)
@@ -152,19 +146,27 @@
     {
         if (Model.EmailUsuario[cont] != emailCliente)
         {
-            <div>
-                <h4><strong>@Html.DisplayFor(model => model.NombreUsuario[cont])</strong></h4>
-                <p class="valoracion">
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6 card">
+                <h5 class="d-inline-block card-title"><strong>@Html.DisplayFor(model => model.NombreUsuario[cont])</strong></h5>
+                <p>
                     @if (Model.ValoracionCliente[cont] > 0)
                     {
                         for (var i = 0; i < Model.ValoracionCliente[cont]; i++)
                         {
                             <span>&#9733;</span>
                         }
+                        for (var i = 0; i < (5 - Model.ValoracionCliente[cont]); i++)
+                        {
+                            <span>&#9734;</span>
+                        }
                     }
                     else
                     {
                         <span>&#9733;</span>
+                        <span>&#9734;</span>
+                        <span>&#9734;</span>
+                        <span>&#9734;</span>
+                        <span>&#9734;</span>
                     }
                 </p>
                 <p>@Html.DisplayFor(model => model.Comentarios[cont])</p>
@@ -176,6 +178,7 @@
     {
         <p>Aún no hay comentarios</p>
     }
+    </div>
 </div>
 @if (Session["usuario"] != null && !ya_ha_comentado)
 {

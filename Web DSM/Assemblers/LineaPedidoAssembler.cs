@@ -22,6 +22,10 @@ namespace Web_DSM.Assemblers
             linped.Valoracion = en.Producto.ValoracionMedia;
             linped.Genero = en.Producto.Genero.Nombre;
             linped.ImporteTotal = en.Pedido.PrecioTotal;
+            linped.Estado = en.Pedido.Estado;
+            linped.Direccion = en.Pedido.Direccion;
+            linped.FechaPedido = (DateTime)en.Pedido.FechaPedido;
+            linped.FechaEntrega = (DateTime)en.Pedido.FechaEntrega;
 
             return linped;
         }

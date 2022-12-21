@@ -5,11 +5,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2 class="h2">Cesta</h2>
-
+<h2 class="h2">Mi Cesta</h2>
+<hr />
 <div class="container-fluid index-container">
-    <div class="row">
-        @{ 
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        @{
             double importeTotal = 0;
             int cont = 0;
             int idPedido = 0;
@@ -21,36 +21,41 @@
             cont++;
             idPedido = item.IdPedido;
             <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-4 col-xxl-4">
-                <img src="@Html.DisplayFor(modelItem => item.Imagen)" height="350" width="350" />
-                <p class="fs-4 fw-bold d-inline-block">@Html.DisplayFor(modelItem => item.NombreProducto)</p>
-                <p class="d-inline-block m-3">
-                    @if (item.Valoracion != 0)
-                    {
-                        for (var i = 0; i < item.Valoracion; i++)
-                        {
-                            <span>&#9733;</span>
-                        }
-                        for (var i = 0; i < (5 - item.Valoracion); i++)
-                        {
-                            <span>&#9734;</span>
-                        }
-                    }
-                    else
-                    {
-                        <span>&#9733;</span>
-                        <span>&#9734;</span>
-                        <span>&#9734;</span>
-                        <span>&#9734;</span>
-                        <span>&#9734;</span>
-                    }
-                </p>
-                <div>
-                    <p class="d-inline-block">@Html.DisplayFor(modelItem => item.PrecioUnitario) €/unidad</p>
-                    <p class="badge text-wrap fs-7 d-inline-block m-2 genero">@Html.DisplayFor(modelItem => item.Genero)</p>
+                <div class="card">
+                    <a href="@Url.Action("Details", "Producto", new { id = item.Id })">
+                        <img src="@Html.DisplayFor(modelItem => item.Imagen)" class="card-img-top" height="350" width="350" />
+                        <div class="card-img-overlay"><p class="badge text-wrap fs-7 d-inline-block m-2 genero">@Html.DisplayFor(modelItem => item.Genero)</p></div>
+                    </a>
+                    <div class="card-body">
+                        <p class="fs-4 fw-bold d-inline-block">@Html.DisplayFor(modelItem => item.NombreProducto)</p>
+                        <p class="d-inline-block m-3">
+                            @if (item.Valoracion != 0)
+                            {
+                                for (var i = 0; i < item.Valoracion; i++)
+                                {
+                                    <span>&#9733;</span>
+                                }
+                                for (var i = 0; i < (5 - item.Valoracion); i++)
+                                {
+                                    <span>&#9734;</span>
+                                }
+                            }
+                            else
+                            {
+                                <span>&#9733;</span>
+                                <span>&#9734;</span>
+                                <span>&#9734;</span>
+                                <span>&#9734;</span>
+                                <span>&#9734;</span>
+                            }
+                        </p>
+                        <div>
+                            <p class="d-inline-block">@Html.DisplayFor(modelItem => item.PrecioUnitario) €/unidad</p>
+                        </div>
+                        <p><strong>Cantidad: </strong>@Html.DisplayFor(modelItem => item.Cantidad)</p>
+                    </div>
                 </div>
-                <p><strong>Cantidad: </strong>@Html.DisplayFor(modelItem => item.Cantidad)</p>
-                @Html.ActionLink("Detalles", "Details", "Producto", routeValues: new { id = item.IdProducto }, htmlAttributes: null)
-                <a href="@Url.Action("Delete", "LineaPedido", routeValues: new { id = item.Id })" class="bi bi-trash3-fill">Eliminar</a>
+                <a href="@Url.Action("Delete", "LineaPedido", routeValues: new { id = item.IdProducto })" class="bi bi-trash3-fill btn btn-block text-center my-3">Eliminar</a>
             </div>
         }
     </div>
@@ -60,11 +65,13 @@
 @if (cont > 0)
 {
     <div>
-        <p class="badge text-wrap fs-4 puntos mt-2">Importe total: @importeTotal €</p>
-        @Html.ActionLink("Comprar ahora", "Edit", "Pedido", routeValues: new { idPedido = idPedido, impTotal = importeTotal }, htmlAttributes: new { @class = "btn btn-block text-center my-3" })
+        <p class="badge text-wrap fs-4 puntos mt-2 d-inline-block">Importe total: @importeTotal €</p>
     </div>
-} else { 
-<div>
-    <p>Aún no has añadido ningún producto a la cesta.</p>
-</div>
+    @Html.ActionLink("Comprar ahora", "Edit", "Pedido", routeValues: new { idPedido = idPedido, impTotal = importeTotal }, htmlAttributes: new { @class = "btn btn-block text-center my-3 d-inline-block" })
+}
+else
+{
+    <div>
+        <p>Aún no has añadido ningún producto a la cesta.</p>
+    </div>
 }

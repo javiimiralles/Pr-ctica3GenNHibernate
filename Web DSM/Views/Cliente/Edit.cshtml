@@ -5,6 +5,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<a href="@Url.Action("Index", "Cliente")" class="bi bi-arrow-left-circle-fill fs-3"></a>
+
 <h2 class="h2">Cambia tus datos</h2>
 
 
@@ -69,10 +71,6 @@
         </div>
     </div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

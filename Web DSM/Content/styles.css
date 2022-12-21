@@ -7,6 +7,10 @@
     padding: 0;
 }
 
+body {
+    background-color: white;
+}
+
 :root {
     --rosa_oscuro: #7c616c;
     --rosa: #D1B1CB;
@@ -15,6 +19,10 @@
 
 .h2 {
     font-family: 'IBM Plex Sans', sans-serif;
+}
+
+div.card {
+    box-shadow: 20px 20px 80px var(--rosa_oscuro);
 }
 
 /*Inputs*/
@@ -89,7 +97,8 @@ div.navbar-right > div > a:hover {
 }
 
 p.genero {
-    background-color: var(--rosa_oscuro);
+    background-color: var(--rosa);
+    color: black;
 }
 
 p.recomendado {
@@ -98,47 +107,12 @@ p.recomendado {
 }
 
 /*Details*/
-.details-container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    margin: 3em;
-}
-
-.details-container > div:last-of-type {
-    margin-left: 5em;
-}
-
-.comments-container > div {
-    padding: 0 1.3em;
-}
-
-.comments-container > div:nth-child(even) {
-    border-left: 1px solid lightgray;
-    border-right: 1px solid lightgray;
-}
-
-.comments-container > div > h4, .comments-container > div > p:first-of-type {
-    display: inline-block;
-}
-
-.valoracion {
-    margin-left: .5em;
-    color: gray;
-}
-
 textarea.form-control {
     resize: none;
     border: none;
 }
 
 /*Login y Register*/
-body {
-    background-color: #eee;
-    height: 100vh;
-    /*font-family: 'Poppins', sans-serif;*/
-    background: linear-gradient(to top, #fff 10%, var(--rosa_claro) 90%) no-repeat
-}
-
 .wrapper {
     max-width: 500px;
     border-radius: 10px;
@@ -152,11 +126,7 @@ body {
     font-size: 3.5rem;
     font-weight: bold;
     color: var(--rosa_oscuro);
-    font-style: italic
-}
-
-.h4 {
-    font-family: 'Poppins', sans-serif
+    text-decoration: none;
 }
 
 div > a {
@@ -169,13 +139,13 @@ div > a:hover {
     color: var(--rosa);
 }
 
-.btn.btn-block {
+.btn.btn-block, .btn.btn-sm {
     border-radius: 20px;
     background-color: var(--rosa_oscuro);
     color: white;
 }
 
-.btn.btn-block:hover {
+.btn.btn-block:hover, .btn.btn-sm:hover{
     background-color: var(--rosa_claro);
 }
 

@@ -16,7 +16,7 @@ namespace Práctica3GenNHibernate.CP.Práctica3
 {
 public partial class PedidoCP : BasicCP
 {
-        public void RealizarPago(int p_oid_pedido, string p_oid_cliente, string p_num_tarjeta)
+        public void RealizarPago(int p_oid_pedido, string p_oid_cliente, string p_direccion, string p_localidad, string p_provincia, int p_cod_postal, string p_num_tarjeta, double p_imp_total)
         {
             PedidoCAD pedidoCAD = null;
             PedidoCEN pedidoCEN = null;
@@ -24,6 +24,8 @@ public partial class PedidoCP : BasicCP
             ClienteCEN clienteCEN = null;
             ProductoCAD productoCAD = null;
             ProductoCEN productoCEN = null;
+            LineaPedidoCAD linpedCAD = null;
+            LineaPedidoCEN linpedCEN = null;
 
             try
             {
@@ -38,18 +40,35 @@ public partial class PedidoCP : BasicCP
                 productoCAD = new ProductoCAD(session);
                 productoCEN = new ProductoCEN(productoCAD);
 
+                linpedCAD = new LineaPedidoCAD(session);
+                linpedCEN = new LineaPedidoCEN(linpedCAD);
+
                 PedidoEN pedidoEN = pedidoCEN.ReadOID(p_oid_pedido);
                 ClienteEN clienteEN = clienteCEN.ReadOID(p_oid_cliente);
 
-                pedidoEN.TipoTarjeta = p_num_tarjeta;
-
-                // SIMULACIÓN DE PAGO
-                // Se validaría que la tarjeta fuera correcta
-                //if(p_num_tarjeta == correcta) {
+                //Modificamos los valores
                 pedidoEN.FechaPedido = DateTime.Now;
                 pedidoEN.FechaEntrega = DateTime.Now.AddDays(7);
                 pedidoEN.Estado = Enumerated.Práctica3.EstadoPedidoEnum.reparto;
+                pedidoEN.Direccion = p_direccion;
+                pedidoEN.Localidad = p_localidad;
+                pedidoEN.Provincia = p_provincia;
+                pedidoEN.CodigoPostal = p_cod_postal;
+                pedidoEN.PrecioTotal = p_imp_total;
+
+                //Reinicializamos la cesta
+                IList<LineaPedidoEN> cestaVacia = new List<LineaPedidoEN>();
+                pedidoCEN.New_("", "", "", 0, "", p_oid_cliente, cestaVacia);
+
+                clienteEN.Puntos = clienteEN.Puntos + (int)p_imp_total / 2;
                 clienteEN.Puntos++;
+
+                //Decrementamos el stock de los productos
+                IList<LineaPedidoEN> listaLinpeds = pedidoEN.LineaPedido;
+                foreach (LineaPedidoEN linped in listaLinpeds)
+                {
+                    productoCEN.DecrementarStock(linped.Producto.Id, linped.Cantidad);
+                }
 
                 pedidoCAD.ModifyDefault(pedidoEN);
                 clienteCAD.ModifyDefault(clienteEN);

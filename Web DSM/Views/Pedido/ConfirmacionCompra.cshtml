@@ -1,0 +1,14 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="h2">Confirmación de pedido</h2>
+
+<p>El envío de tu pedido se ha confirmado.</p>
+@{ DateTime fecha_entrega = DateTime.Now.AddDays(7); }
+<p><strong>Fecha de entrega aproximada: </strong>@fecha_entrega.ToString("dd/MM/yyyy")</p>
+
+@Html.ActionLink("Volver a Inicio", "Index", "Producto", routeValues: null, htmlAttributes: new { @class = "btn btn-block text-center my-3" })
+

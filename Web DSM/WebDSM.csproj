@@ -333,7 +333,9 @@
     <Content Include="Views\Shared\_AnyadidoACesta.cshtml" />
     <Content Include="Views\LineaPedido\Index.cshtml" />
     <Content Include="Views\Pedido\Edit.cshtml" />
-    <Content Include="Views\Pedido\Index.cshtml" />
+    <Content Include="Views\Pedido\ConfirmacionCompra.cshtml" />
+    <Content Include="Views\LineaPedido\MisPedidos.cshtml" />
+    <Content Include="Views\Account\ErrorRegistro.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

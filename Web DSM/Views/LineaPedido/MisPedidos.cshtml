@@ -1,0 +1,103 @@
+﻿@model IEnumerable<Web_DSM.Models.LineaPedidoViewModel>
+@using Práctica3GenNHibernate.Enumerated.Práctica3;
+
+@{
+    ViewBag.Title = "MisPedidos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="h2">Mis Pedidos</h2>
+
+<div class="container-fluid index-container">
+    <div class="row">
+        <h3>En reparto</h3>
+        <hr />
+        @{
+            int cont = 0;
+            IList<int> idsPedidos = new List<int>();
+        }
+
+        @foreach (var item in Model)
+        {
+            idsPedidos.Add(item.IdPedido);
+        }
+        @foreach (var item in Model)
+        {
+            if (item.Estado == EstadoPedidoEnum.reparto)
+            {
+                if (cont == 0 || idsPedidos[cont - 1] != item.IdPedido)
+                {
+                    <h4>Número de seguimiento: @Html.DisplayFor(modelItem => item.IdPedido)</h4>
+                    <div class="mb-0">
+                        <p><strong>Dirección de entrega: </strong>@Html.DisplayFor(modelItem => item.Direccion)</p>
+                        @{
+                            string fecha_pedido = item.FechaPedido.ToString("dd/MM/yyyy");
+                            string fecha_entrega = item.FechaEntrega.ToString("dd/MM/yyyy");
+                        }
+                        <p><strong>Fecha de pedido: </strong>@fecha_pedido</p>
+                        <p><strong>Fecha de entrega: </strong>@fecha_entrega</p>
+                    </div>
+                }
+                <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-4 col-xxl-4 mt-0">
+                    <div class="card">
+                        <a href="@Url.Action("Details", "Producto", new { id = item.IdProducto })">
+                            <img src="@Html.DisplayFor(modelItem => item.Imagen)" class="card-img-top" height="350" width="350" />
+                        </a>
+                        <div class="card-body">
+                            <p class="fs-4 fw-bold d-inline-block">@Html.DisplayFor(modelItem => item.NombreProducto)</p>
+                            <p class="d-inline-block">@Html.DisplayFor(modelItem => item.PrecioUnitario) €/unidad</p>
+                        </div>
+                    </div>
+                </div>
+            }
+            cont++;
+        } 
+    </div>
+</div>
+
+<div class="container-fluid index-container">
+    <div class="row">
+        <h3>Entregados</h3>
+        <hr />
+        @{
+            cont = 0;
+            idsPedidos = new List<int>();
+        }
+
+        @foreach (var item in Model)
+        {
+            idsPedidos.Add(item.IdPedido);
+        }
+        @foreach (var item in Model)
+        {
+            if (item.Estado == EstadoPedidoEnum.entregado)
+            {
+                if (cont == 0 || idsPedidos[cont - 1] != item.IdPedido)
+                {
+                    <h4>Número de seguimiento: @Html.DisplayFor(modelItem => item.IdPedido)</h4>
+                    <div class="mb-0">
+                        <p><strong>Dirección de entrega: </strong>@Html.DisplayFor(modelItem => item.Direccion)</p>
+                        @{
+                            string fecha_pedido = item.FechaPedido.ToString("dd/MM/yyyy");
+                            string fecha_entrega = item.FechaEntrega.ToString("dd/MM/yyyy");
+                        }
+                        <p><strong>Fecha de pedido: </strong>@fecha_pedido</p>
+                        <p><strong>Fecha de entrega: </strong>@fecha_entrega</p>
+                    </div>
+                }
+                <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-4 col-xxl-4 mt-0">
+                    <div class="card">
+                        <a href="@Url.Action("Details", "Producto", new { id = item.IdProducto })">
+                            <img src="@Html.DisplayFor(modelItem => item.Imagen)" class="card-img-top" height="350" width="350" />
+                        </a>
+                        <div class="card-body">
+                            <p class="fs-4 fw-bold d-inline-block">@Html.DisplayFor(modelItem => item.NombreProducto)</p>
+                            <p class="d-inline-block">@Html.DisplayFor(modelItem => item.PrecioUnitario) €/unidad</p>
+                        </div>
+                    </div>
+                </div>
+            }
+            cont++;
+        }
+    </div>
+</div>

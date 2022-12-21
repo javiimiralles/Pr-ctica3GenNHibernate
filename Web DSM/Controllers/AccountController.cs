@@ -155,7 +155,6 @@ namespace Web_DSM.Controllers
                     return View(model);
             }
         }
-
         //
         // GET: /Account/Register
         [AllowAnonymous]
@@ -201,8 +200,12 @@ namespace Web_DSM.Controllers
                     // await UserManager.SendEmailAsync(user.Id, "Confirmar cuenta", "Para confirmar la cuenta, haga clic <a href=\"" + callbackUrl + "\">aquí</a>");
 
                     return RedirectToAction("Index", "Producto");
+                } else
+                {
+                    return View("ErrorRegistro");
                 }
-                AddErrors(result);
+
+                //AddErrors(result);
             }
 
             // Si llegamos a este punto, es que se ha producido un error y volvemos a mostrar el formulario

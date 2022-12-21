@@ -44,6 +44,7 @@ namespace Web_DSM.Controllers
                 ValoracionClienteCP cp = new ValoracionClienteCP();
                 string emailCliente = ((ClienteEN)Session["usuario"]).Email;
                 cp.New_(val.Valoracion, emailCliente, (int)Session["idProducto"], val.Comentario);
+
                 return RedirectToAction("Details", "Producto", new { id = (int)Session["idProducto"] });
             }
             catch

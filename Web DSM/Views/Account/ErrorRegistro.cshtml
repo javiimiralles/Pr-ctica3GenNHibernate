@@ -1,0 +1,10 @@
+﻿
+@{
+    ViewBag.Title = "ErrorRegistro";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="h2">Ha ocurrido un error</h2>
+<p>El correo electrónico que has introducido ya está asociado a otro usuario.</p>
+@Html.ActionLink("Volver a registro", "Register", routeValues: null, htmlAttributes: new { @class = "btn btn-block text-center my-3" })
+

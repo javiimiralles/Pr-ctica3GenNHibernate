@@ -5,44 +5,39 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Edit</h2>
+<a href="@Url.Action("Details", "Producto", routeValues: new { id = (int)Session["idProducto"] })" class="bi bi-arrow-left-circle-fill fs-3"></a>
 
+<h2 class="h2">Editar comentario</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
     <div class="form-horizontal">
-        <h4>ValoracionViewModel</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
+        <div class="form-group py-2">
             @Html.LabelFor(model => model.Valoracion, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Valoracion, new { htmlAttributes = new { @class = "form-control" } })
+            <div class="input-field-number bg-white">
+                @Html.EditorFor(model => model.Valoracion, new { htmlAttributes = new { @class = "form-control", type = "number", style = "Width:60px", min = "1", max = "5", step = "0.5", @autofocus = "true" } })
                 @Html.ValidationMessageFor(model => model.Valoracion, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group py-2">
             @Html.LabelFor(model => model.Comentario, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Comentario, new { htmlAttributes = new { @class = "form-control" } })
+            <div class="input-field bg-white w-25">
+                @Html.EditorFor(model => model.Comentario, new { htmlAttributes = new { @class = "form-control", cols = "70", rows = "8" } })
                 @Html.ValidationMessageFor(model => model.Comentario, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Editar" class="btn btn-block text-center my-3" />
             </div>
         </div>
     </div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
